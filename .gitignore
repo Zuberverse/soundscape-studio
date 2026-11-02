@@ -1,0 +1,46 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store
+.idea/
+.vscode/
+
+# Dependencies and build/cache state, when implementation begins
+node_modules/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.next/
+dist/
+build/
+coverage/
+*.log
+
+# Private projects, generated media, model weights and local job state
+local/
+data/
+outputs/
+renders/
+models/
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.mp4
+*.mov
+*.webm
