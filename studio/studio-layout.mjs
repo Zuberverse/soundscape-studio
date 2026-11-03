@@ -25,8 +25,8 @@ export function mountStudioLayout(actions){
   document.body.classList.add('studio-mode');main.classList.add('studio-main');
   function showPane(next){pane=next;main.dataset.pane=next;mobile.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.id==='panel-'+next)))}
   function title(){stageTitle.textContent=mode==='frame'?actions.frameTitle()||'Choose a frame':actions.resultTitle()||'Result'}
-  function showFrame(){mode='frame';canvas.hidden=false;activity.hidden=true;frameButton.classList.add('active');resultButton.classList.remove('active');showPane('stage');title()}
-  function showResult(){if(!hasResult)return;mode='result';canvas.hidden=true;activity.hidden=false;resultButton.classList.add('active');frameButton.classList.remove('active');showPane('stage');title()}
+  function showFrame(){for(const id of ['generated-video','generated-audio'])$('#'+id).pause();mode='frame';canvas.hidden=false;activity.hidden=true;frameButton.classList.add('active');resultButton.classList.remove('active');showPane('stage');title()}
+  function showResult(){if(!hasResult)return;actions.beforeResult?.();mode='result';canvas.hidden=true;activity.hidden=false;resultButton.classList.add('active');frameButton.classList.remove('active');showPane('stage');title()}
   function focusLibrary(){actions.showLibrary();showPane('library');$('#library-create-frame').focus({preventScroll:true})}
   function focusSound(){showPane('sound');$('#demo-song').focus({preventScroll:true})}
   function focusInspector(){showPane('controls');$('#scene-name').focus({preventScroll:true})}

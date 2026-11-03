@@ -21,7 +21,7 @@ npm run test:e2e
 
 Keep the server running for browser checks. Playwright 1.63.0 is a pinned development dependency. The suite intercepts generation endpoints, uses a synthetic microphone and writes evidence to a temporary directory printed on completion. It spends no Comfy credits and records no person. Chromium's experimental WebMCP feature is enabled only in that isolated test browser, not in the user's browser.
 
-The suite covers the viewport layout, progress, consent, frame/scene libraries and naming, OAuth draft recovery, workflow exports, synthetic microphone release, real bundled playback and all 14 native WebMCP tools. Separate real Comfy execution evidence is documented in [IMPLEMENTATION.md](IMPLEMENTATION.md).
+The suite covers the viewport layout, progress, consent, frame/scene libraries and naming, OAuth draft recovery, workflow exports, synthetic microphone release, real bundled playback and all 14 native WebMCP tools. Generated-frame fixtures use different image bytes from the included example so deduplication cannot hide selection/removal recovery bugs. Blocked-popup and hidden-preview playback checks preserve connection and listening behavior. Separate real Comfy execution evidence is documented in [IMPLEMENTATION.md](IMPLEMENTATION.md).
 
 ## Workflow source
 
