@@ -24,7 +24,7 @@ The actual local studio was separately exercised through browser sign-in, approv
 
 ## Regression evidence
 
-Sixteen unit/integration checks cover native workflow parameters/link preservation, excerpt bounds, PCM WAV encoding, portable recipes, protected file paths, OAuth scope/state, fixed upload hosts, explicit credit consent, concurrent-submit exclusion, uncertain-submit handling, run recovery and unreadable-history failure.
+Eighteen unit/integration checks cover native workflow parameters/link preservation, excerpt bounds, PCM WAV encoding, portable recipes, protected file paths, OAuth scope/state, fixed upload hosts, explicit credit consent, concurrent-submit exclusion, uncertain-submit handling and review release, interrupted-run recovery, run recovery, unreadable-history failure, and static serving (byte ranges for Safari/iOS media, revalidation, path-free errors, localhost redirect, CSP).
 
 The isolated Chromium browser suite exercises frame create/select/import/rename/removal recovery with distinct image bytes; blocked-popup connection preservation; hidden-result playback pause; custom and default scene names; rename persistence and result viewing; progress and explicit review; workflow downloads; sign-in draft recovery; synthetic microphone conversion and released tracks; MiniMax song preparation/use; actual bundled video playback; native registration/invocation of all 14 WebMCP tools; and desktop, compact and phone panel geometry. WebMCP was tested in Chromium 153 with its experimental feature enabled. Ordinary browsers retain the handoff fallback.
 

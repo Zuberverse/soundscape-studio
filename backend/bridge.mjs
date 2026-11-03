@@ -23,7 +23,7 @@ export class ComfyBridge {
   async connect(){
     if(this.connected)return {connected:true};
     this.authorizationUrl=null;
-    this.client=new Client({name:'Soundscape Studio',version:'0.2.0'});
+    this.client=new Client({name:'Soundscape Studio',version:'0.1.0'});
     this.transport=new StreamableHTTPClientTransport(endpoint,{authProvider:this.provider});
     try{await this.client.connect(this.transport);this.connected=true;return {connected:true}}
     catch(e){this.connected=false;if(e instanceof UnauthorizedError&&this.authorizationUrl)return {connected:false,url:this.authorizationUrl};throw Error('Comfy connection could not be established. Please retry sign-in.')}

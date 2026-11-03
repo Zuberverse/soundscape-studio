@@ -10,7 +10,7 @@ The badge confirms authentication. The workspace selected during sign-in also ne
 
 ## Sign-in does not open
 
-Allow popups for the local studio and try connecting again. A blocked popup keeps the existing connection and draft. Use the exact 127.0.0.1 address printed by the server. Sign-in happens with Comfy; do not paste tokens into the studio or a GitHub issue.
+Allow popups for the local studio and try connecting again. A blocked popup keeps the existing connection and draft. Use the exact 127.0.0.1 address printed by the server; `localhost` page loads redirect there. Sign-in happens with Comfy; do not paste tokens into the studio or a GitHub issue.
 
 ## Review and create asks for a source
 
@@ -24,7 +24,7 @@ Use localhost or HTTPS and allow microphone permission. Record at least two seco
 
 Refresh restores browser-saved drafts and library metadata when storage is available. Restarting the Node server clears its memory-only OAuth credentials, so reconnect Comfy. Known job records and downloaded results remain in ignored `local/`. Keep using the existing run rather than starting another one.
 
-If submission is marked uncertain, inspect the Comfy queue before trying again. Do not erase `local/jobs.json` to bypass recovery protection. A cancellation request does not prove the provider stopped execution; wait for its terminal state.
+If submission is marked uncertain, the studio blocks new paid runs and shows **Check your Comfy queue**. Open your Comfy queue first: let a run you find there finish, or cancel it in Comfy. Then choose **I checked Comfy · release this run** to unblock new runs; the studio never resubmits a released run. A run interrupted before submission is marked failed on restart, since nothing reached Comfy. Do not erase `local/jobs.json` to bypass recovery protection. A cancellation request does not prove the provider stopped execution; wait for its terminal state.
 
 ## Files or names disappeared
 

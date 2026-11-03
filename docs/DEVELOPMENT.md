@@ -33,7 +33,7 @@ python3 scripts/build-workflows.py
 
 ## Storage and debugging
 
-Browser localStorage holds settings. IndexedDB holds drafts, frames and scene metadata. Clear browser draft is in **How it works** and preserves the frame/scene library. Site-data deletion removes browser-owned data. Run history and downloaded outputs belong to `local/`; do not delete it to work around uncertain submissions. Inspect the existing Comfy queue/job identity first.
+Browser localStorage holds settings. IndexedDB holds drafts, frames and scene metadata. Clear browser draft is in **How it works** and preserves the frame/scene library. Site-data deletion removes browser-owned data. Run history and downloaded outputs belong to `local/`; do not delete it to work around uncertain submissions. Inspect the existing Comfy queue/job identity first, then use the in-app release action.
 
 Never commit `local/`, credentials, real environment files, private prompts or local absolute paths. The bundled original demo is an explicit exception to generated-media exclusion. Do not expose the local server as a public service; hosted tenancy is unimplemented.
 

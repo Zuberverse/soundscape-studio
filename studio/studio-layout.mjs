@@ -30,6 +30,6 @@ export function mountStudioLayout(actions){
   function focusLibrary(){actions.showLibrary();showPane('library');$('#library-create-frame').focus({preventScroll:true})}
   function focusSound(){showPane('sound');$('#demo-song').focus({preventScroll:true})}
   function focusInspector(){showPane('controls');$('#scene-name').focus({preventScroll:true})}
-  function updateJob(job,isNew){hasResult=true;resultButton.disabled=false;resultButton.textContent=['completed','failed','cancelled','needs_review'].includes(job.state)?'Result':'Result · working';if(isNew)showResult();else{canvas.hidden=mode!=='frame';activity.hidden=mode!=='result';title()}}
+  function updateJob(job,isNew){hasResult=true;resultButton.disabled=false;resultButton.textContent=['completed','failed','cancelled','released','needs_review'].includes(job.state)?'Result':'Result · working';if(isNew)showResult();else{canvas.hidden=mode!=='frame';activity.hidden=mode!=='result';title()}}
   showFrame();return {showFrame,showResult,showPane,focusLibrary,focusSound,focusInspector,updateJob,refresh:title,get mode(){return mode}};
 }
