@@ -10,7 +10,7 @@ An open-source local studio for making short music-driven scenes with Comfy. Cre
 
 ![Soundscape Studio with its frame library, central preview, scene controls and audio passage editor](docs/images/studio.png)
 
-[Watch First Light, the included eight-second demo](demo/world.mp4) · [Setup help](docs/TROUBLESHOOTING.md) · [Contributing](CONTRIBUTING.md)
+[Download First Light, the eight-second demo (MP4)](https://github.com/Zuberverse/soundscape-studio/raw/refs/heads/main/demo/world.mp4) · [Setup help](docs/TROUBLESHOOTING.md) · [Contributing](CONTRIBUTING.md) · [Demo walkthrough guide](docs/DEMO.md)
 
 ## Run the studio
 

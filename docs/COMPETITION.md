@@ -1,29 +1,21 @@
-# Competition brief
+# Competition brief and readiness
 
-**As of:** November 2, 2026; official page rechecked for source publication
+**Checked:** November 3, 2026. The official page's expanded requirements and the entry form welcome/contact screens were inspected. This is a readiness note, not an entry receipt.
 
-**Purpose:** planning reference for Comfy's Open Source Higgsfield challenge
+## Current requirements
 
-**Status:** not registered, submitted or qualified by this repository's existence
+The [official challenge](https://comfy.org/open-source-higgsfield) and [entry form](https://form.typeform.com/to/V1dSQrkS) state a deadline of **November 3 at 9 a.m. Pacific / noon Eastern**.
 
-The [current official page](https://comfy.org/open-source-higgsfield) lists the submission deadline as **November 3, 2026, 9 a.m. Pacific / noon Eastern**, with winners on November 10. Earlier announcements and some event descriptions retain October 30 and November 6. Recheck the live page and submission form before relying on this snapshot.
+The expanded instructions require a ComfyUI-based app, an open-source license and reproducible setup, a demo video no longer than two minutes, and a social post linking the demo with `#OpenSourceHiggsfield`. A hosted try-it link is optional. Entries must be lawful and suitable for a general audience, with rights to their contents. One entry is allowed per person. Submission grants the listed organizers permission to feature the work with credit. Review the live terms before entering.
 
-The brief allows original creative apps using ComfyUI, alongside rebuilds of recognizable tools. It requires open-source app code, a license and setup instructions; the demo should show actual work and explain how it was made. A paid future service is not a reason to withhold the code needed to run the submitted app.
+Best Overall, Most Innovative and the LTX workflow bonus are relevant candidates. LTX must be the core video model for that bonus. MiniMax Music 3 is not MiniMax H3 and does not establish eligibility for the H3 bonus. Do not claim Open Weights Only eligibility without reviewing every executed dependency and model term. [Official categories](https://comfy.org/open-source-higgsfield)
 
-Relevant targets are Best Overall ($10,000), Most Innovative (RTX 5090), and the LTX VFX bonus ($2,000, requiring LTX as the core video model). Open Weights Only has a separate RTX 5090 prize and excludes partner nodes/closed APIs. A Comfy partner-node path must not claim that category. Main and provider-bonus categories may both apply. These are published categories, not eligibility assurances.
+## Soundscape Studio status
 
-## Fit
+- Public repository, MIT license, complete source, workflow files and clone-to-run instructions: available.
+- Actual Comfy output: First Light, an original eight-second image/music/LTX example, bundled with provenance. It is an output sample, not an app walkthrough.
+- App walkthrough: record the working interface and explain the Comfy pipeline. A proposed sequence is in [DEMO.md](DEMO.md); the recording is not yet included.
+- Public social post: not published by this project task. Prepare it after the walkthrough and owner review.
+- Independent recipient billing and real-device microphone checks: still open, as documented in [implementation evidence](IMPLEMENTATION.md).
 
-The implemented demonstration is First Light: one original song passage, a starting frame and an eight-second LTX scene. The studio adds reusable frames, movement direction, optional names and a visible review-to-result journey. Show one real import-to-export journey and the executed Comfy graph. Explain the editable world score, distinguish raw generation from finishing, and state what remains unsupported.
-
-Do not claim the first music-to-video system, guaranteed beat sync, seamless looping or an all-open-weights stack without supporting evidence.
-
-## Before any entry
-
-- Verify the live rules, exact form fields, demo/link requirements, social-post requirements and any terms. The collapsed page sections and interactive submission form were not fully inspected during this research; those details remain open.
-- Verify the published local studio and native Comfy workflows from a fresh recipient setup, with the model/node inventory and required notices. An optional plugin or prompt-only package is not a substitute for that working app. Verify that recipients execute using their own workspace.
-- Confirm input/demo publication rights and avoid secrets or private data in graphs and manifests.
-- Check the eligible category against the exact executed workflow, including every partner/API dependency.
-- Record the demo, tag/release and reproducible example actually submitted.
-
-Publishing source does not register or submit a competition entry. A contest submission, social post or further generation requires its own authorization. The current repo contains a working experimental app; recipient billing and real-device acceptance remain open.
+The inspected form begins with contact details, then optional social identities, and indicates twelve questions. Later fields were not inspected because the required contact screen was left blank. No personal information, agreement or entry was submitted. A repository alone does not enter the competition.
