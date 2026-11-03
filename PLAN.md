@@ -1,93 +1,26 @@
-# Initial build plan
+# Build and release plan
 
-**As of:** November 2, 2026
+**As of:** November 2, 2026. The initial documentation foundation was followed by an explicitly authorized full local build. [IMPLEMENTATION.md](docs/IMPLEMENTATION.md) owns current proof.
 
-**Status:** proposal for a later implementation task
+| Milestone | Current evidence | Remaining acceptance |
+|---|---|---|
+| Inspectable Comfy generation | Actual Z-Image, MiniMax Music 3 and native LTX-2.3 runs; saved integrated native app | Broader creative comparison; model/service terms at release |
+| Soundtrack and finishing | Eight-second matching audio/video; Comfy exact-frame finishing; decoded soundtrack correlation ~0.9963 | Additional passage lengths/inputs; seamless loops remain unclaimed |
+| Local studio | Frame library, four sound sources, movement, names, OAuth, approval, progress/results, exports | Independent fresh-user execution and billing isolation |
+| Beginner UX | Viewport workspace, visible controls, fixed prompts, result stage, neutral agent handoff | Human feedback across more screen sizes and assistive technologies |
+| Agent compatibility | 14 native experimental WebMCP tools tested; clipboard fallback | Other browser/agent-host discovery, no universal support claim |
+| Public release | Public foundation repo; working implementation and original demo prepared locally | Scoped publication approval, independent recipient test, current contest review |
 
-**Current boundary:** research, specification and repository setup only
+## Required next release proof
 
-## Recommendation
+1. With a separately authorized recipient/workspace and bounded spend, import/run the candidate and verify their account owns the job and usage, with no matching author-workspace charge. [#2](https://github.com/Zuberverse/soundscape-studio/issues/2) owns this gate.
+2. Have a beginner complete frame → sound → direction/name → review → result/download using public instructions. Check missing execution access, reconnect, errors and existing-job recovery.
+3. Test additional passage lengths against Comfy's frame grid; retain exact duration/audio evidence. [#3](https://github.com/Zuberverse/soundscape-studio/issues/3) owns finishing/loop proof. Do not add a seamless label without repeated-wrap review.
+4. Verify clean install, source/privacy/license review and the selected source revision before publication. Update existing issues with redacted evidence when external publication is authorized. The current local implementation does not close their full release criteria.
+5. Recheck the live competition deadline, categories and submission form before entering. No contest submission is authorized by completing the app.
 
-Prove one Comfy audio-to-video path before building the application around it. Start with an uploaded music excerpt, an opening image and one world. Add editable musical timing and a documented Comfy finishing graph only after the raw generation has been evaluated.
+## Deliberate later scope
 
-The product's distinctive contribution should be an inspectable **world score**: a small, editable description of how musical passages guide visual intention, generation and finishing. It is a design concept, not an existing model or a claim that music-to-video is new.
+Portrait output, longer musical arrangements, visual loop finishing, editable beat markers, recipe re-import, comparative scene takes and local Comfy targets need their own proof. A paid hosted edition needs a tenancy, cost and operations design; no pricing or billing feature is active. Native App Mode and an optional agent remain useful alternate front doors to the same inspectable Comfy graphs.
 
-## Phase 0 — Prove the workflow, user-owned execution and access
-
-**Owner:** generation/integration maintainer. **Precondition:** a separate instruction to begin implementation and a bounded generation budget.
-
-1. Inspect the selected Comfy environment's supported models, nodes, limits and access. Start with App Mode in the user's own workspace. Verify sign-in, imported-copy ownership and the absence of a creator-funded endpoint. Distinguish optional MCP access from standalone SDK authentication.
-2. Select an official LTX audio-to-video graph or Comfy LTX partner-node graph. Record the exact upstream revision and required model/node versions before adapting it.
-3. Use one authorized, redistribution-cleared audio excerpt and image. Run a plain baseline, then a bounded comparison holding the visual direction as stable as the backend allows.
-4. Listen and inspect motion, image retention, timing, artifacts, actual duration, elapsed time and real credit/GPU cost. Record failures as well as selected takes.
-5. Check whether the music drives useful motion rather than only plausible generic activity. Seek a second listener's judgment when available; do not convert one subjective example into a general benchmark.
-
-**Exit:** one replayable Comfy graph, exact backend/model inventory, one actual output, measured resource use and an explicit route decision. Before any public runnable distribution, verify with a separately authorized user/workspace that their run is billed to them and creates no owner-workspace job. If native conditioning is unusable, evaluate a separately labeled Comfy image/video-plus-finishing route. Do not silently switch providers or describe the fallback as native audio conditioning.
-
-**Stop:** missing access, unsupported nodes, unknown license applicability or no bounded budget. Keep the spec; do not build a speculative integration around unverified capability.
-
-## Phase 1 — Establish music and export contracts
-
-**Owner:** audio/workflow maintainer. **Dependency:** Phase 0 route decision.
-
-- Verify excerpt timing, sample rate conversion and soundtrack preservation. Beat markers are editable proposals with tempo/offset correction and a free-timing path.
-- Define the world-score and recipe formats in prose, then implement versioned schemas when code starts.
-- Resolve music duration versus the model's frame grid. Generate enough frames and trim through Comfy finishing rather than stretching the music to fit.
-- Prove a short-clip export first. Evaluate a visual loop separately; inspect repeated playback and retain the finishing method in metadata.
-- Test finishing-node availability on the selected Comfy host. Avoid requiring an unsupported custom node in the advertised first path.
-
-**Exit:** measured trim accuracy, a stable timebase, a valid export with source music and a candid decision about loop support.
-
-## Phase 2 — Build the intuitive Comfy app
-
-**Owner:** application/workflow maintainer. **Dependency:** Phases 0–1.
-
-Expose the validated workflow through Comfy App Mode: music, excerpt start/duration, image, world, motion amount and an explicit Run action, with preview and export outputs. Prefer native controls. Make opening and running a user's own copy the documented default. Keep the graph available for editing and reproduction.
-
-Verify what App Mode can actually present: audio preview, accepted file inputs, timing controls, job/error handling and download behavior. Do not promise a custom waveform editor or comparison timeline from the existing native control surface. Keep successful takes and confirm that a reconnect does not create another job.
-
-**Exit:** a fresh user can follow the documented import → own workspace → configure → run → preview/export journey without an agent or access to the maintainer's account. The underlying graph and costs are visible.
-
-A richer local TypeScript/React studio is a subsequent option if native controls obstruct the creative journey. It must keep user-owned Comfy execution and avoid a shared funded proxy. Do not add that service before demonstrating the need.
-
-## Phase 3 — Make the result worth sharing
-
-**Owner:** creative/product maintainer. **Dependency:** Phase 2.
-
-Develop the three world directions on the same cleared excerpt. Improve motion restraint, framing, lighting and musical phrasing. Add portrait output only after landscape export is reliable. Expose concise controls and keep workflow detail available without requiring it in the main flow.
-
-An optional companion skill/plugin can then operate the same proven workflow via the user's own Comfy MCP connection. Package only for explicitly tested hosts and preserve per-host consent, file handling and cost controls. The actual app remains usable without an agent.
-
-Run the acceptance checks in [SPEC.md](SPEC.md). Compare raw output with finished output and demonstrate the exact role of each. Check keyboard operation, reduced motion, unreadable states, source-image cropping and repeat playback.
-
-**Exit:** three coherent worlds, a reproducible example and a concise real product demo. If only one world is proven, ship and describe one.
-
-## Phase 4 — Release and competition review
-
-**Owner:** maintainer. **Dependency:** a working app and documented proof.
-
-Verify a clean checkout, supported backend setup, exact model/node inventory, license notices, safe configuration, input rights and export reproduction. Create a release only when these checks support it. Recheck the live competition page and submission form; [COMPETITION.md](docs/COMPETITION.md) is a dated brief, not proof of registration or eligibility.
-
-A deadline is not a reason to mark an unimplemented feature complete. The current repository is not a submission-ready application. Enter only after the actual app and demo meet the rules and publication/submission is authorized.
-
-## Time and cost
-
-No reliable build-time or generation-cost estimate exists before Phase 0. Keep that first spike small: one baseline and at most two deliberate comparisons under an approved budget, stopping early if the path fails. Three worlds and high-resolution retries multiply generation cost. Finishing edits should reuse a successful generation where possible.
-
-For planning, estimate separately: backend generation units × current rate, GPU time if self-hosted, storage, and any hosting. Record both the estimate and actual use. This task purchases nothing and runs no generation.
-
-## Definition of planning complete
-
-- Public repository contains standalone spec, plan, research, license and contribution guidance.
-- Comfy-only creation, current implementation status and future commercial options are explicit.
-- Canonical issues name the first proof gates and their acceptance criteria.
-- Local files and remote repository are verified; no platform code or media generation has started.
-
-## Initial investigation issues
-
-- [#1 — Prove native audio-conditioned Comfy generation](https://github.com/Zuberverse/soundscape-studio/issues/1)
-- [#2 — Verify recipient-owned execution and billing isolation](https://github.com/Zuberverse/soundscape-studio/issues/2)
-- [#3 — Validate soundtrack timing and Comfy finishing](https://github.com/Zuberverse/soundscape-studio/issues/3)
-- [#4 — Build the first App Mode journey after those proof gates](https://github.com/Zuberverse/soundscape-studio/issues/4)
-
-These issue records own progress and acceptance updates. They do not authorize implementation or generation by themselves.
+The [issue tracker](https://github.com/Zuberverse/soundscape-studio/issues) is the task/defect owner. This plan names proof gates, not a duplicate backlog. [SPEC.md](SPEC.md) owns the current product contract and separates implemented behavior from future direction.

@@ -2,15 +2,16 @@
 
 Soundscape Studio is a public open-source Music to World tool. Start with
 README.md, SPEC.md, PLAN.md and WORKSTREAM.md. Technical design and evidence
-live in docs/ARCHITECTURE.md and docs/RESEARCH.md. GitHub Issues is the
+live in docs/ARCHITECTURE.md and docs/RESEARCH.md. DESIGN.md owns the studio interface. GitHub Issues is the
 canonical task/defect owner; check it before relevant work and reuse existing IDs.
 
-Current scope is a documentation foundation. Do not implement the platform,
-install its dependencies, generate media, configure credentials, deploy or
-submit a competition entry without an explicit implementation task.
+The local app and native Comfy workflows are implemented. Read docs/IMPLEMENTATION.md
+for actual behavior and proof. Validate with npm test; browser tests use npm run
+test:e2e with the local server running. All paid generation needs a task-specific
+budget. Preserve existing native workflow versions and local user data.
 
-The first delivery is Comfy App Mode in the user's own workspace; an agent/MCP
-companion is optional. Never ship maintainer credentials, a creator-funded public
+The current delivery is a single-user local studio with Comfy OAuth and native
+workflow/App Mode exports; agent access is optional. Never ship maintainer credentials, a creator-funded public
 inference endpoint or an invitation into a shared credit pool as default access.
 Read docs/DELIVERY-AND-COSTS.md before connection or distribution changes.
 
@@ -31,6 +32,5 @@ spend, credentials and deployment require task-specific authorization.
 Original code/docs are MIT; external dependencies and media retain their own
 terms. Future monetization is possible, not an implemented offer.
 
-Validation for this stage: review relative links, git diff --check, secret/private
-data scan and consistency across spec, plan and current state. There is no app
-test suite yet. docs/DEVELOPMENT.md owns setup and future validation requirements.
+Validation: npm test, relevant browser checks, git diff --check, secret/private
+data scan and consistency across spec, plan and current state. docs/DEVELOPMENT.md owns setup and future validation requirements.

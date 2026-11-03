@@ -1,23 +1,24 @@
 # Delivery, optional agents and who pays
 
-**Decision:** start with Comfy App Mode; use each user's own Comfy workspace or compute.
+**Decision:** a standalone local mini app, with native Comfy workflows and optional agent access. Each user connects their own Comfy workspace.
 
-**As of:** November 2, 2026. Architecture recommendation; separate-user execution is untested.
+**As of:** November 2, 2026. Local v0.1 implemented; independent recipient billing remains untested.
 
-## The intuitive first version
+## Current delivery
 
-The user opens Soundscape Studio in Comfy, signs in to their own account, opens/imports their own copy, supplies music and an image, adjusts a few controls, then runs and reviews the result. The workflow and App Mode configuration are public source.
+Users run the Node app locally, open its browser studio and connect their own Comfy account through OAuth. The studio uploads only approved sources, submits a saved workflow, polls the existing job and retrieves results. Its runtime has no shared maintainer credential or public generation endpoint. One process serves one local user; do not deploy it as a hosted multi-user service.
 
-An agent is **optional**. A companion skill/plugin could later let someone say, “Make this passage feel like an aurora portal,” and have their existing agent operate the same graph through their own Comfy MCP connection. A plugin supplies method and controls; it does not include free inference or a shared model credential.
+An agent is optional. WebMCP tools prepare the browser when supported; a clipboard brief works with Codex or Claude. No Soundscape plugin is required. Native workflow/App Mode downloads are an alternate route: import into the user's own workspace, supply source files and run there.
 
-| Delivery | Is an agent required? | Intended execution owner | Decision |
+| Delivery | Agent required? | Execution owner | State |
 |---|---|---|---|
-| Comfy App Mode + public workflows | No | User's own workspace/Comfy instance | First product target |
-| Companion skill/plugin using Comfy MCP | Yes, user's chosen supported agent | User's authenticated Comfy connection | Optional later front door |
-| Custom local studio UI | No | User-configured Comfy target | Later if native controls limit usability |
-| Public service using a maintainer key/deployment | No | Maintainer's billed infrastructure | Excluded from initial distribution |
+| Local studio + OAuth | No | Account/workspace selected by the local user | Implemented; one-account live proof |
+| Native Comfy workflow/App Mode | No | User's own imported copy/workspace | Implemented and executed |
+| WebMCP / clipboard handoff | Optional | Same user-approved Comfy route | Experimental browser tools + handoff |
+| Local self-hosted Comfy target | No | User's hardware and model rights | Not integrated or verified |
+| Hosted managed compute | No | Requires a separate funded service design | Not implemented |
 
-Do not build a new MCP server when the existing official connection can operate the workflow. Packaging for different agent hosts requires separate capability/install verification; there is no universal plugin promised by this foundation.
+OAuth tokens remain in server memory, never in the page or repository. Restart requires reconnecting. The connection badge indicates authentication only; credits and execution entitlement are separate. Costs are currently marked variable rather than estimated. Each generation opens a review with explicit unchecked credit consent. Runs are not automatically retried.
 
 ## Costs and account boundaries
 
@@ -49,7 +50,7 @@ Comfy's built-in Agent is another optional control surface and spends credits fo
 
 Before advertising “runs on your own account,” test with two separately authorized workspaces/users. Share the actual candidate app/graph without credentials. Have the recipient sign in, import their own copy, run one bounded job and retrieve its output. Record the recipient's job/workspace and usage evidence, and verify no matching job or usage landed in the author's workspace. Use only redacted evidence in public documentation.
 
-Also test missing sign-in, missing credits and reconnect/retry. The product must fail visibly rather than spend from a hidden fallback. Do not create accounts, invite people, spend or run this test as part of the documentation foundation.
+Also test missing sign-in, missing credits and reconnect/retry. The product must fail visibly rather than spend from a hidden fallback. This test needs a separately authorized recipient/workspace and bounded spend; the development operator’s successful run does not satisfy it.
 
 ## Later monetization
 

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "celestial-cathedral",
+    "name": "Open Vault",
+    "description": "Monumental ivory arches and a gold light ribbon.",
+    "prompt": "A vaulted ivory hall suspended above clouds. Monumental arches surround an open doorway. A narrow gold ribbon rests on a reflective floor, leading toward the doorway. Atmospheric green and violet light beyond the arches. Coherent architectural depth, cinematic composition, tactile marble and gold."
+  },
+  {
+    "id": "aurora-portal",
+    "name": "Tidal Glass",
+    "description": "Dark water and low ribbons of aurora.",
+    "prompt": "An open ocean of dark glass beneath low ribbons of green and violet aurora. An illuminated opening on the distant horizon, deep blue shadows and precise reflections, cinematic spatial depth, wide composition. Quiet water with subtle ripples."
+  },
+  {
+    "id": "luminous-abstraction",
+    "name": "Ribbon Study",
+    "description": "Pearl fabric and amber glass in midnight space.",
+    "prompt": "Sculptural pearl fabric and amber glass suspended in deep midnight space. Tangible folds, soft highlights and rich material texture. One clear central composition with coherent depth. Cinematic light, intricate surfaces, restrained palette."
+  }
+]

@@ -2,21 +2,35 @@
 
 **As of:** November 2, 2026
 
-**State:** initial product proposal; application unimplemented
+**State:** current v0.1 contract and later product direction; docs/IMPLEMENTATION.md owns actual proof and limits
 
 **Product owner:** this document
 
 ## Purpose and audience
 
-Help musicians, visual artists and small creative teams give a piece of music a visual world they can direct, reproduce and reuse. The output is initially a short video or loop for a track preview, performance backdrop or social clip. It is not an explorable 3D environment.
+Help musicians, visual artists and small creative teams give a piece of music a visual world they can direct, reproduce and reuse. The output is initially a short video; a verified loop is a later option for a track preview, performance backdrop or social clip. It is not an explorable 3D environment.
 
 The defining behavior is a visible connection between musical timing, visual intention and the resulting Comfy workflow. A user can inspect and change that relationship. The project must offer more than a prompt box and a downloaded video.
 
 ## Delivery and who pays
 
-The first interface is a Comfy-native App Mode app, not a separately hosted AI service. Users run a copy in their own Comfy workspace or on a supported Comfy installation they control. No separate agent is required. A companion skill/plugin can later direct the same workflows through the user's own MCP connection; it is optional and requires host-specific proof before release.
+The current interface is a standalone local mini app, backed by a single-user loopback server. Users connect their own Comfy account through OAuth; generation and finishing run in the selected workspace. Native Comfy workflow/App Mode export is an alternate route. An agent is optional: clipboard handoff works independently, and experimental WebMCP tools can prepare the browser.
 
-There is no project-funded generation endpoint, bundled credential, shared creator workspace or automatic credit subsidy. The user's selected workspace/hardware owns compute costs. Agent usage, if chosen, belongs to the user's agent plan or provider arrangement. Being open source does not make hosted inference free. [Delivery and cost contract](docs/DELIVERY-AND-COSTS.md) owns the detail and the required separate-user verification.
+There is no project-funded public inference endpoint, bundled credential, shared creator workspace or automatic subsidy. Separate-user billing isolation is an explicit release gate and has not been tested. [Delivery and costs](docs/DELIVERY-AND-COSTS.md) owns that contract. Hosted multi-user service and local self-hosted Comfy support are not implemented.
+
+## Current complete journey
+
+1. Create a frame through Comfy, upload an image, or choose a saved frame. Frames are reusable still images with optional names and local rename/download/removal controls. Appearance presets are Open Vault, Tidal Glass, Ribbon Study and custom.
+2. Use the included original song, upload audio, record up to 30 seconds or describe a MiniMax Music 3 song with optional lyrics. Preview and select a 2–16 second passage. Audio is limited to 50 MB and five minutes; image input to 20 MB and 25 megapixels.
+3. Choose Slow drift, Wide orbit, Steady view or custom movement. The scene prompt controls motion and light around the selected frame. To change the setting, create/select a different frame. Prompts are fixed 176px fields with internal scrolling.
+4. Optionally name the scene. Blank names get Scene N; created scenes can be renamed without regeneration. Review sources and credit consent, then create one run in Comfy. Show actual state, spinner, error and cancellation; never invent progress percentages or blindly resubmit uncertain jobs.
+5. Review the result on the stage, download the video and save a portable recipe or prepared native workflow. Libraries/names/drafts are browser-local; results/known jobs are retained locally. An imported video is session-only.
+
+The desktop UI fits the viewport with a library, stage, full-height inspector and sound deck. Smaller screens switch panels. Only the selected musical passage and frame are uploaded after approval. Comfy sign-in, media readiness and execution access are distinct states.
+
+## Later direction and acceptance
+
+The following detailed journey contains aspirational timing, analysis and loop features. It is not a claim that every future control is implemented. Current proof and gaps remain in docs/IMPLEMENTATION.md.
 
 ## Creation boundary
 
@@ -24,7 +38,7 @@ There is no project-funded generation endpoint, bundled credential, shared creat
 
 Import, audio analysis, waveform display, project persistence, metadata inspection and technical QA can run locally. Creative finishing and export should remain visible in the Comfy graph. If a required finishing node is unavailable on the selected host, expose that limitation and resolve it before claiming the feature. Do not silently route the work through another media service.
 
-## First complete journey
+## Expanded future journey
 
 ### 1. Bring the music
 
@@ -32,9 +46,9 @@ Import a WAV or MP3 file and choose an 8–16 second excerpt. Proposed initial b
 
 The intended studio experience shows a waveform and plays the selected passage. The first App Mode version may instead use audio preview plus explicit start/duration fields; verify its controls before promising a draggable timeline. Report duration and proposed beat locations. Offer manual tempo and first-beat offset, half/double tempo and a free-timing mode. Silence, ambient music and irregular meter are valid inputs; the app must not invent confident rhythmic structure.
 
-For the first release, the user supplies music. Generating music within Comfy is a later optional workflow, not an automatic step.
+The user may upload audio, record a microphone take, or prepare a MiniMax Music 3 song from a style prompt and optional lyrics. Generated music is an explicit choice in the user's Comfy workspace. Preview the result and choose its passage before creating a world; never replace uploaded music automatically.
 
-### 2. Establish the world
+### 2. Establish the frame and scene
 
 Import one PNG or JPEG, proposed maximum 20 MB and 25 megapixels. Choose a starting direction or write a scene description. Preserve the distinction between an opening-frame reference and a guarantee that the image's subject will stay unchanged.
 

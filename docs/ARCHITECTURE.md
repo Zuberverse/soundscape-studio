@@ -1,77 +1,58 @@
-# Proposed architecture
+# Architecture
 
-**State:** design only, November 2, 2026. No component below is implemented.
-
-## Recommended first shape
-
-Build a **Comfy App Mode interface over reusable Comfy workflows**, running in the user's own workspace or a supported Comfy installation they control. No separate agent is required. Add an optional companion skill/plugin over the user's own MCP connection after the workflow works. A custom studio UI is a later option if native controls obstruct the creative experience.
+**As of:** November 2, 2026. Implemented local v0.1; see [verification](IMPLEMENTATION.md).
 
 ```mermaid
 flowchart LR
-    A[Music + image] --> B[User-owned Comfy workspace]
-    B --> C[Soundscape Studio App Mode]
-    C --> D[Generation + finishing graphs]
-    D --> E[Preview + video + portable recipe]
-    F[Optional user agent] --> G[User's own Comfy MCP connection]
-    G --> B
+    A[Browser studio] --> B[Single-user loopback server]
+    B --> C[Official MCP client and OAuth]
+    C --> D[User-selected Comfy workspace]
+    D --> E[Generation and finishing workflows]
+    E --> F[Local result and stage preview]
+    A --> G[Optional WebMCP or clipboard handoff]
+    A --> H[Native Comfy workflow export]
 ```
 
-There is no maintainer-funded public inference endpoint, shared workspace invitation or bundled credential. See [delivery and costs](DELIVERY-AND-COSTS.md) for the cost contract. A shared app link conveys a workflow; it must not convey authority to spend the creator's credits.
+## Source boundaries
 
-## Components and sequence
-
-| Component | Responsibility | First implementation target |
-|---|---|---|
-| App Mode configuration | Clear music/image inputs, timing fields, world/motion controls, outputs | Native Comfy interface; verify available controls |
-| Music preparation | Trim, audio preview, timing proposals and manual correction | Supported Comfy nodes; local analysis allowed when needed |
-| World score | Source references, excerpt, direction, prompt and intentional timing | Versioned portable recipe; editable controls |
-| Generation graph | Generate video conditioned on music and an optional opening image | Official LTX candidate graph or disclosed Comfy partner route |
-| Finishing graph | Exact trim, restrained effects when supported, loop treatment and SaveVideo | Verified Comfy nodes on the selected host |
-| Project/take record | Inputs, versions, job IDs, settings and measured resources | User-owned workflow/assets plus a portable recipe |
-| Optional agent companion | Help prepare direction and operate the same graphs | User-installed skill/plugin with their own existing Comfy MCP |
-
-All generative music, images and video use Comfy. Local analysis and QA create no alternative generation path. Creation and finishing graphs remain inspectable and record any partner nodes. No text model is required for the core App Mode route.
-
-Comfy describes App Mode as a view over the same workflow/backend and queue, with selected inputs and outputs. This supports the first shape; it does not prove that its native controls can implement a custom waveform timeline. [Official App Mode introduction](https://blog.comfy.org/p/from-workflow-to-app-introducing)
-
-## Generation routes
-
-1. **Preferred capability:** native Comfy audio-conditioned LTX workflow. Host/model support must be established.
-2. **Explicit alternative:** Comfy LTX partner A2V node. Still Comfy-contained but externally executed and potentially billed; excludes an Open Weights Only claim for that path.
-3. **Creative fallback:** Comfy image/video generation with music-timed finishing, honestly labeled. It must not be called native audio conditioning.
-
-These are candidates, not automatic fallbacks. No direct LTX, Higgsfield, fal or other provider-generation SDK belongs in the creation path.
-
-## Proposed data contracts
-
-These are design fields, not shipped schemas.
-
-| Record | Essential fields |
+| Source | Responsibility |
 |---|---|
-| Source asset | ID, content hash, relative reference, media type, duration/dimensions and rights note |
-| Music analysis | Algorithm/version, sample rate/time origin, proposed beats, energy curve, user corrections and uncertainty |
-| World score | Schema version, source IDs, excerpt start/duration, world direction, prompt, intentional events, controls and seed |
-| Take | Score revision, backend type, workflow hash, model/node versions, job ID, state, measured resources and output references |
-| Export recipe | Executed API graph, optional editable authoring graph, relative asset references/hashes, finishing method, fps/duration and notices |
+| `studio/index.html`, `styles.css`, `studio-layout.mjs` | Accessible controls and responsive viewport workspace |
+| `studio/app.mjs` | Audio/image preparation, connection state, review, polling and result interaction |
+| `studio/library.mjs`, `collections.mjs` | Additive IndexedDB schema, reusable frames, scene metadata, names and local library |
+| `studio/core.mjs` | Pure input validation, native graph parameters, portable recipe and PCM WAV encoding |
+| `studio/webmcp.mjs` | Feature-detected experimental browser agent tools; preparation only |
+| `server.mjs` | Loopback HTTP, session/Host/Origin checks, safe static files and action endpoints |
+| `backend/bridge.mjs` | Official MCP client, supported OAuth flow, fixed Comfy service and response decoding |
+| `backend/jobs.mjs` | One active run, source upload, saved workflow submission, recovery, cancellation and result collection |
+| `workflows/`, `vendor/comfy/` | Inspectable native Comfy graphs and upstream attribution |
 
-The audio sample clock owns excerpt timing. Convert to a fixed output-frame timebase explicitly. A model frame grid may require extra generated frames; finishing trims to the target without stretching the music. Proposed beats remain separate from user-accepted events.
+The runtime uses Node 22+ and `@modelcontextprotocol/client` 2.4.0. Plain browser modules need no bundler. Playwright 1.63.0 is test-only. Python 3 rebuilds movement and native microphone variants. No database service, text model or separate agent is required.
 
-Recipes omit credentials, absolute paths, account IDs, signed URLs and unnecessary private filenames. Model/hardware/service variation means replayable inputs do not guarantee identical pixels.
+## Compute and authentication
 
-## State and recovery
+All generative media and creative finishing use Comfy. Frame generation is Z-Image-Turbo, song generation is native MiniMax Music 3 through Comfy, and scenes use native LTX-2.3 audio/image conditioning plus Comfy finishing. There is no direct-provider fallback or maintainer key.
 
-Use native job identity and state first. For any companion or later custom interface, persist submission intent, then the returned job ID immediately. Reconnect to that job. An ambiguous submission without an ID requires reconciliation rather than a new paid submission. Finishing retries should reuse the successful generation.
+The server listens on 127.0.0.1. The official MCP client handles browser OAuth, state/PKCE and supported service discovery. Credentials live in process memory. The browser receives a local session cookie, connection status and redacted job records, never provider tokens. The Comfy account/workspace selected at sign-in is the executing account. Account isolation across two independent recipients is a separate release test, not established by this architecture alone.
 
-The official SDK documents duplicate-key rejection and recovery by known job ID; a duplicate submit is not an assumed replay. Progress streams do not replace terminal job state. [Comfy SDK submission contract](https://docs.comfy.org/development/api-development/sdks#retrying-a-submit-the-idempotency-key)
+This process serves one local operator. Multiple tabs share its connection and backend run history. It is not a multi-user hosted service or authorization boundary between people. Restarting clears authentication and requires reconnecting.
 
-## Media and privacy
+## Creation lifecycle
 
-Upload only the selected excerpt, image and necessary settings after explicit user action. Keep the full source track local when trimming before upload is supported. If the initial native flow uploads a full input first, disclose that difference and offer a pretrimmed-file path.
+The browser validates media before generation: audio ≤50 MB and 2–300 seconds; image ≤20 MB and 25 megapixels. It decodes audio locally and creates a WAV containing only the chosen 2–16 second passage. After review and explicit credit consent, the backend creates a durable local job identity before uploading or submitting.
 
-Do not publish user inputs, prompts or output links automatically. Validate decoded dimensions/duration and file types. Preserve original assets. Separate local deletion from provider retention; deleting a local recipe is not proof that remote media is erased.
+The backend prepares a native graph, uploads the scene's excerpt/image through the Comfy-provided fixed upload service, saves a new workflow in the user's workspace and submits once. It records the returned Cloud job ID immediately. Jobs progress through preparing, submitting, queued/running, downloading and completed, or retain failed/cancelled/review-required states. Refresh follows the known job. Concurrent starts share the owned active submission. A missing/ambiguous Cloud identity blocks blind paid resubmission. Cancellation is requested from Comfy and terminal state is checked afterward.
 
-## Optional custom interface
+The native frame grid can exceed the requested musical duration. Finishing trims in Comfy to the intended output frame count without stretching the soundtrack. The verified eight-second result has matching audio/video duration. Model response to phrasing does not imply exact beat placement.
 
-If App Mode cannot support useful excerpt editing or take comparison, evaluate a local TypeScript/React interface and narrow Python coordinator. It would operate the user's Comfy target and keep keys service-side. The SDK's Cloud, deployment and self-hosted proxy surfaces must be checked individually; do not assume a raw local Comfy endpoint implements v2. [Comfy SDK guide](https://docs.comfy.org/development/api-development/sdks)
+## Data and exports
 
-No package manager, framework version, coordinator, database or executable manifest is selected in this foundation. A local custom interface would not itself require a user's agent. A paid hosted service would need a separate tenancy, billing and operational design.
+IndexedDB schema 2 adds `frames` and `scenes` without removing the earlier `draft` store. Frames retain original bytes, content hash, name, source and dimensions. Named scenes retain recipe metadata and local output references. The selected frame ID is restored before content deduplication, preserving names for identical images. Local removal records prevent recovered generated frames reappearing unexpectedly.
+
+The ignored `local/` tree holds input upload copies, atomic job-history JSON and downloaded results. It is not an encrypted vault or a provider deletion service. Browser source drafts support OAuth/refresh recovery; imported video URLs are session-only. Download important media before clearing browser or local data.
+
+Portable recipes identify settings and source hashes without embedding media or credentials. The prepared native authoring workflow can be downloaded and imported into Comfy with the same source files. The saved executed workflow remains in the user's Comfy workspace; the app does not yet export a separate post-run API graph or re-import portable recipes automatically. Identical model pixels are not guaranteed.
+
+## Agent surface
+
+WebMCP feature detection prefers `document.modelContext`, then the older navigator variant. Its tools inspect choices, select frames, edit names/direction/timing and prepare reviews. Paid submission and microphone capture remain explicit UI actions. Unsupported browsers use the optional clipboard brief. [WEBMCP.md](WEBMCP.md) owns the tool contract and experimental proof boundary.

@@ -6,7 +6,7 @@
 
 **Freshness:** recheck contest details before entry; recheck models, nodes, APIs, pricing and licenses before implementation.
 
-**Evidence limit:** no model download, paid request, generation, benchmark or integration test was performed.
+**Historical scope:** this initial source review preceded implementation. Actual later Comfy runs and browser proof are recorded in IMPLEMENTATION.md; the findings below retain their original research context.
 
 ## What changed the direction
 

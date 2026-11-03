@@ -1,0 +1,11 @@
+{
+  "duration_seconds": 8,
+  "dimensions": [
+    1280,
+    704
+  ],
+  "fps": 24,
+  "audio_correlation_to_original": 0.9962754249572754,
+  "test": "actual saved Comfy app run, video/audio inspected with ffprobe",
+  "loop_claim": false
+}

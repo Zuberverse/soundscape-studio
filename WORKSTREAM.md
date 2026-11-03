@@ -1,31 +1,10 @@
 # Current work
 
 **Updated:** November 2, 2026
+**Status:** local implementation and demo verified; publication and independent-recipient acceptance pending
 
-**Status:** idle — specification and repository foundation; implementation awaits a separate task
+The standalone mini app now connects to Comfy and runs approved frame, song and scene creation. It includes reusable frames, upload/microphone/MiniMax/demo audio, passage preview, movement presets, optional scene names and free renaming, native workflow/recipe export and a responsive viewport studio. The optional agent handoff and 14 experimental WebMCP tools prepare the same workflow without spending authority.
 
-## Established direction
+An actual saved integrated Comfy app and a browser → local server → Comfy → result scene run succeeded. All generation and finishing stayed in Comfy. First Light has eight-second video/audio at 1280 × 704 and 24 fps. Regression checks cover recovery, duplicate submission, libraries/names, synthetic mic release, real bundled playback and responsive geometry. [Implementation evidence](docs/IMPLEMENTATION.md) owns exact limits.
 
-Soundscape Studio is an open-source Music to World tool with possible future
-commercial offerings. Comfy is mandatory for all media generation. The first delivery is Comfy App Mode in the user's own workspace, with an optional
-own-agent/MCP companion later. No maintainer-funded public inference is proposed.
-The first proposed journey is one music excerpt, one image, one directed world and one
-honest export. Product truth is owned by [SPEC.md](SPEC.md).
-
-## Present state
-
-The repository contains a source-backed specification, architecture, build plan,
-contest brief and OSS guidance. There is no application, exported Comfy graph,
-dependency install, generated media, model-backed test or deployed service.
-
-## Next
-
-When implementation is requested, begin with [PLAN.md](PLAN.md) Phase 0: prove
-one audio-conditioned Comfy workflow with measured cost and recorded limitations.
-Resolve runtime access and an explicit generation budget before execution. The
-[issue tracker](https://github.com/Zuberverse/soundscape-studio/issues) owns the
-initial investigations and all subsequent defects/tasks.
-
-The full competition form, actual Cloud model/node availability, soundtrack
-handling and loop quality remain unverified. They are not established blockers
-to reading or improving this foundation.
+The public remote still contains the initial foundation until a separately authorized source publication. No hosted service or contest entry is live. Independent user/workspace billing isolation remains [#2](https://github.com/Zuberverse/soundscape-studio/issues/2); the other original issues retain their full release acceptance. Do not treat a one-account demonstration as independent billing proof.

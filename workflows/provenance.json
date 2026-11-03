@@ -1,0 +1,7 @@
+{
+  "source": "https://cloud.comfy.org/templates/video_ltx2_3_ia2v.json",
+  "retrieved": "2026-11-02",
+  "sha256": "8da461298c44736ca3ab10584cd1d7c5e2321155e04f650c4d3ff8bfb48e7238",
+  "license": "MIT, Copyright (c) 2023-present Comfy Org",
+  "adaptation": "World prompts, empty media inputs, App Mode exposure and output names; model subgraph preserved."
+}

@@ -44,3 +44,8 @@ models/
 *.mp4
 *.mov
 *.webm
+
+# Original bundled demonstration media
+!demo/song.mp3
+!demo/opening-frame.png
+!demo/world.mp4

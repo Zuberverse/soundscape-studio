@@ -1,0 +1,42 @@
+{
+  "id": 339,
+  "type": "RecordAudio",
+  "pos": [
+    -440,
+    4330
+  ],
+  "size": [
+    400,
+    160
+  ],
+  "flags": {},
+  "order": 2,
+  "mode": 4,
+  "inputs": [],
+  "outputs": [
+    {
+      "name": "AUDIO",
+      "type": "AUDIO",
+      "links": null
+    }
+  ],
+  "properties": {
+    "Node name for S&R": "RecordAudio",
+    "cnr_id": "comfy-core",
+    "ver": "0.16.3",
+    "enableTabs": false,
+    "tabWidth": 65,
+    "tabXOffset": 10,
+    "hasSecondTab": false,
+    "secondTabText": "Send Back",
+    "secondTabOffset": 80,
+    "secondTabWidth": 65
+  },
+  "widgets_values": [
+    "",
+    ""
+  ],
+  "widgets_values_named": {
+    "audio": ""
+  }
+}

@@ -1,0 +1,39 @@
+import {test} from 'node:test';
+import http from 'node:http';
+import assert from 'node:assert/strict';
+import {mkdtemp,readFile,writeFile,mkdir,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {resolve,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {ComfyBridge,uploadUrl} from '../backend/bridge.mjs';
+import {StudioJobs} from '../backend/jobs.mjs';
+import {createServer} from '../server.mjs';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const tick=()=>new Promise(r=>setTimeout(r,20));
+class FakeComfy {
+  connected=true;calls=[];secret='fixture-token-must-never-be-persisted';
+  async connect(){this.connected=true;return {connected:true}}async disconnect(){this.connected=false}
+  async call(name,args){this.calls.push({name,args});if(name==='save_workflow')return {data:{workflow_id:'fixture-workflow'}};if(name==='run_saved_workflow')return {data:{result:{prompt_id:'fixture-prompt'}}};if(name==='get_job_status')return {data:{result:{job_status:'completed'}}};if(name==='get_output')return {data:{results:[{class_type:'SaveAudioAdvanced',url:'https://storage.googleapis.com/comfy-cloud-assets/fixture.mp3'}]}};return {data:{}}}
+}
+test('Comfy auth keeps tokens in memory, requests no key/billing administration, and rejects wrong state',async()=>{
+  const bridge=new ComfyBridge('http://127.0.0.1:4317');bridge.provider.saveTokens({access_token:'fixture'});assert.equal(bridge.provider.tokens().access_token,'fixture');assert.doesNotMatch(bridge.provider.clientMetadata.scope,/api-keys:write|billing:write|members:write/);await assert.rejects(bridge.callback(new URLSearchParams({state:'wrong',code:'untrusted'})),/state/);bridge.provider.invalidateCredentials('all');assert.equal(bridge.provider.tokens(),null);
+});
+test('an upload response can only identify the fixed Comfy upload service',()=>{
+  assert.equal(uploadUrl({text:"curl -- 'https://cloud.comfy.org/api/uploads/abc_123'"}),'https://cloud.comfy.org/api/uploads/abc_123');assert.throws(()=>uploadUrl({text:'https://other.example/api/uploads/steal'}));
+});
+test('paid runs require connection and explicit approval; duplicate starts reuse the owned run',async()=>{
+  const storage=await mkdtemp(resolve(tmpdir(),'soundscape-jobs-'));try{const comfy=new FakeComfy(),jobs=new StudioJobs(root,comfy,storage);await jobs.init();const input={song:{prompt:'A gentle instrumental',duration:12},confirm:true};comfy.connected=false;await assert.rejects(jobs.submit('song',input),/Connect/);comfy.connected=true;await assert.rejects(jobs.submit('song',{...input,confirm:false}),/approve/);const first=await jobs.submit('song',input),second=await jobs.submit('song',input);assert.equal(first.id,second.id);for(let i=0;i<50&&jobs.jobs.get(first.id).state!=='running';i++)await tick();assert.equal(jobs.jobs.get(first.id).state,'running');assert.equal(comfy.calls.filter(c=>c.name==='run_saved_workflow').length,1);const saved=await readFile(resolve(storage,'local/jobs.json'),'utf8');assert.doesNotMatch(saved,/fixture-token/);assert.equal(jobs.jobs.get(first.id).promptId,'fixture-prompt');}finally{await rm(storage,{recursive:true,force:true})}
+});
+test('an ambiguous submit is retained for review and is not automatically repeated',async()=>{
+  const storage=await mkdtemp(resolve(tmpdir(),'soundscape-uncertain-'));try{const comfy=new FakeComfy();comfy.call=async(name,args)=>{comfy.calls.push({name,args});if(name==='save_workflow')return {data:{workflow_id:'fixture'}};throw Error('Response lost after submission')};const jobs=new StudioJobs(root,comfy,storage);await jobs.init();const input={song:{prompt:'A gentle instrumental',duration:12},confirm:true},job=await jobs.submit('song',input);for(let i=0;i<50&&jobs.jobs.get(job.id).state!=='needs_review';i++)await tick();assert.equal(jobs.jobs.get(job.id).state,'needs_review');assert.equal((await jobs.submit('song',input)).id,job.id);assert.equal(comfy.calls.filter(c=>c.name==='run_saved_workflow').length,1);}finally{await rm(storage,{recursive:true,force:true})}
+});
+test('unreadable run history blocks new spending instead of erasing recovery information',async()=>{
+  const storage=await mkdtemp(resolve(tmpdir(),'soundscape-history-'));try{await mkdir(resolve(storage,'local'));await writeFile(resolve(storage,'local/jobs.json'),'broken');const jobs=new StudioJobs(root,new FakeComfy(),storage);await jobs.init();await assert.rejects(jobs.submit('song',{confirm:true,song:{prompt:'test',duration:12}}),/history/);assert.equal(await readFile(resolve(storage,'local/jobs.json'),'utf8'),'broken');}finally{await rm(storage,{recursive:true,force:true})}
+});
+test('local action endpoints reject foreign hosts, missing sessions and cross-origin commands',async()=>{
+  const storage=await mkdtemp(resolve(tmpdir(),'soundscape-http-')),comfy=new FakeComfy(),server=createServer(comfy,{storageRoot:storage});await new Promise(r=>server.listen(0,'127.0.0.1',r));const url='http://127.0.0.1:'+server.address().port,host='127.0.0.1:'+server.address().port,origin=url;try{assert.equal(await new Promise((ok,no)=>{http.get(url,{headers:{host:'untrusted.example'}},r=>{r.resume();ok(r.statusCode)}).on('error',no)}),403);assert.equal((await fetch(url+'/api/state',{headers:{host}})).status,403);const page=await fetch(url+'/',{headers:{host}}),cookie=page.headers.get('set-cookie').split(';')[0];assert.equal((await fetch(url+'/api/connect',{method:'POST',headers:{host,cookie,origin:'https://untrusted.example'}})).status,403);const response=await fetch(url+'/api/connect',{method:'POST',headers:{host,cookie,origin}});assert.equal(response.status,200);assert.equal((await response.json()).connected,true);}finally{await new Promise(r=>server.close(r));await rm(storage,{recursive:true,force:true})}
+});
+
+test('restarting the app recovers an active run instead of submitting it again',async()=>{const storage=await mkdtemp(resolve(tmpdir(),'soundscape-recovery-'));try{const comfy=new FakeComfy(),first=new StudioJobs(root,comfy,storage);await first.init();const input={song:{prompt:'A gentle instrumental',duration:12},confirm:true},job=await first.submit('song',input);for(let i=0;i<50&&first.jobs.get(job.id).state!=='running';i++)await tick();const second=new StudioJobs(root,comfy,storage);await second.init();assert.equal((await second.submit('song',input)).id,job.id);assert.equal(comfy.calls.filter(c=>c.name==='run_saved_workflow').length,1);}finally{await rm(storage,{recursive:true,force:true})}});
+
+test('concurrent requests reserve a single run before asynchronous template loading',async()=>{const storage=await mkdtemp(resolve(tmpdir(),'soundscape-concurrent-'));try{const comfy=new FakeComfy(),jobs=new StudioJobs(root,comfy,storage);await jobs.init();const input={song:{prompt:'A gentle instrumental',duration:12},confirm:true};const [first,second]=await Promise.all([jobs.submit('song',input),jobs.submit('song',input)]);assert.equal(first.id,second.id);for(let i=0;i<50&&jobs.jobs.get(first.id).state!=='running';i++)await tick();assert.equal(comfy.calls.filter(c=>c.name==='run_saved_workflow').length,1);}finally{await rm(storage,{recursive:true,force:true})}});

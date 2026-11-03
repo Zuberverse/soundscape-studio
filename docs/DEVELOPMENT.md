@@ -1,54 +1,40 @@
-# Development setup
+# Development
 
-**Stage:** documentation foundation, November 2, 2026.
+Requires Node.js 22+ and npm; verified with Node 24.21.0. Runtime dependency: official MCP client 2.4.0. The frontend is plain HTML/CSS/modules; no build step.
 
-There is nothing to install or launch yet. No package manager, application
-dependency set, model files, workflow JSON or CI build has been added. The
-architecture is a proposal, not a working starter application.
+```sh
+npm ci
+npm start
+```
 
-## Read and contribute
+Open http://127.0.0.1:4317. `PORT` can select another local port, but use the displayed 127.0.0.1 URL for OAuth and actions. Keep one local server per person. Stop with Ctrl-C. A server restart requires reconnecting Comfy; known job/result files remain under ignored `local/`.
 
-Read [AGENTS.md](../AGENTS.md), [SPEC.md](../SPEC.md) and [PLAN.md](../PLAN.md).
-Use ordinary Markdown tooling and `git diff --check` for documentation work.
-Check local relative links, factual citations, stage labels and the public-data
-boundary. Code tests and model-backed QA are not applicable to this foundation.
+Viewing the demo, choosing local media, editing names and exporting workflows need no Comfy connection. Creating media needs OAuth, execution access and credits. Never add a provider key to source or `.env` as a shortcut. All creation remains Comfy-contained.
 
-GitHub Issues owns implementation work and unresolved defects. Planned features
-are described as planned. No recorded software defects would imply little here,
-because no executable application has been inspected.
+## Verification
 
-## First workflow implementation
+```sh
+npm test
+npx playwright install chromium
+npm run test:e2e
+```
 
-Start with a versioned Comfy graph and App Mode configuration in the user's own
-workspace. Record graph provenance, required nodes/models, run instructions and
-a verified separate-user billing check. An agent companion is optional; no
-plugin package or custom MCP server is created in this foundation.
+Keep the server running for browser checks. Playwright 1.63.0 is a pinned development dependency. The suite intercepts generation endpoints, uses a synthetic microphone and writes evidence to a temporary directory printed on completion. It spends no Comfy credits and records no person. Chromium's experimental WebMCP feature is enabled only in that isolated test browser, not in the user's browser.
 
-## If a custom application becomes necessary
+The suite covers the viewport layout, progress, consent, frame/scene libraries and naming, OAuth draft recovery, workflow exports, synthetic microphone release, real bundled playback and all 14 native WebMCP tools. Separate real Comfy execution evidence is documented in [IMPLEMENTATION.md](IMPLEMENTATION.md).
 
-The implementation task must record and test:
+## Workflow source
 
-- Supported Node/Python versions, dependency pins, package manager and lockfiles.
-- Reproducible install, start, check, build and clean-clone smoke commands.
-- A safe environment example with names only; no real secrets in browser code.
-- Comfy target and protocol, exact models/nodes, source revisions and licenses.
-- Local service ports, media storage, job recovery and deletion behavior.
-- One verified import → Comfy job → export path and its actual resource use.
-- Appropriate unit/integration checks and CI after code exists.
+```sh
+python3 scripts/build-workflows.py
+```
 
-Do not publish guessed commands or imply SDK compatibility from documentation
-presence alone. Check the current upstream docs when selecting the stack.
+`vendor/comfy/world-base.json` is the inspected integrated native LTX/finishing graph. `worlds.json` owns movement prompts; the generator produces ordinary and native-microphone variants. Legacy appearance-preset workflow IDs remain for older clients. Root `frame-presets.json` owns still-image appearance recipes; the generator copies its served projection into `studio/`. Z-Image and MiniMax workflow sources are separately retained in `workflows/`. The rebuild performs no inference.
 
-## Developer-agent setup
+## Storage and debugging
 
-AGENTS.md is the single repository instruction source. Codex is the initial
-document-authoring consumer; native loading in a future fresh clone is a
-separate verification step. Other hosts may use their native AGENTS.md support;
-no duplicated adapter, global skill library, private memory, MCP configuration or
-persistent agent role is shipped. No product agent or automatic generation loop
-is part of the initial architecture.
+Browser localStorage holds settings. IndexedDB holds drafts, frames and scene metadata. Clear browser draft is in **How it works** and preserves the frame/scene library. Site-data deletion removes browser-owned data. Run history and downloaded outputs belong to `local/`; do not delete it to work around uncertain submissions. Inspect the existing Comfy queue/job identity first.
 
-Local maintainer hooks are machine configuration, not a repository dependency.
-This stage has no executable CI workflow. Add portable repository checks with
-the first implementation; passing a documentation check never proves the app
-or Comfy backend works.
+Never commit `local/`, credentials, real environment files, private prompts or local absolute paths. The bundled original demo is an explicit exception to generated-media exclusion. Do not expose the local server as a public service; hosted tenancy is unimplemented.
+
+`AGENTS.md` owns project instructions; GitHub Issues owns tasks/defects; `SPEC.md` owns scope; `DESIGN.md` owns the interface; `docs/IMPLEMENTATION.md` owns actual proof and limits.

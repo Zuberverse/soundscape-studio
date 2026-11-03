@@ -1,1 +1,2 @@
-* text=auto eol=lf
+# Preserve verbatim upstream font license text, including its original line endings/spaces.
+studio/fonts/OFL-*.txt whitespace=-blank-at-eol

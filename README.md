@@ -2,49 +2,54 @@
 
 **Give your music a world.**
 
-An open-source Comfy app for turning music and an image into a short, music-driven visual world.
+An open-source local studio for making short music-driven scenes with Comfy. Create or choose a reusable **frame**, add **sound**, direct the movement, and review the resulting **scene**. Download it as a video.
 
-**Status: specification and research foundation. There is no runnable application yet.** The features below describe the proposed product. No generation workflow, benchmark, demo or contest entry has been completed.
+**Status: experimental local v0.1, with a real Comfy-generated demo.** The studio signs in to the user's Comfy account, submits approved runs, shows progress and retrieves results. It is a standalone mini app; an agent is optional. There is no bundled paid key or creator-funded public generation service.
 
-## The idea
+## Run the studio
 
-Bring a track, choose a passage and give it a visual starting point. Soundscape Studio will help you direct a world whose motion and pacing respond to that music, then export a short film or a finished visual loop with its underlying Comfy workflow.
+Requires Node.js 22 or newer and npm.
 
-The first milestone is deliberately focused: **one audio excerpt, one image, one world and one trustworthy export**. Three starting directions are proposed: Celestial Cathedral, Aurora Portal and Luminous Abstraction. They are art directions, not existing assets or trained models.
+```sh
+npm ci
+npm start
+```
 
-Comfy is the required creation backend. All generated music, images and video must pass through inspectable Comfy workflows. Partner nodes may be used when clearly identified; direct generation through unrelated provider SDKs is outside the design. The first version uses the supplied music rather than generating a replacement soundtrack.
+Open **http://127.0.0.1:4317**. Choose **Example** to watch First Light without generating anything. To try the studio, use the included frame and demo song, or bring your own media.
 
-## How it will be delivered
+1. **Frame:** create one through Comfy, upload an image, or choose a saved frame in the library.
+2. **Sound:** use the demo, upload music, record up to 30 seconds, or describe a song for MiniMax Music 3. Select a 2–16 second passage.
+3. **Scene:** choose a movement preset or write a direction. Optionally name the scene; a default is supplied when blank.
+4. **Create:** connect Comfy, review the sources, approve credit use and start one run. Watch and download the result on the stage. Rename it later without generating again.
 
-Start with a simple **Comfy App Mode** interface that users run in their own Comfy workspace or supported self-hosted instance. A separate agent is optional; a future companion can use the user's own Comfy MCP connection. No shared generation endpoint, maintainer API key or subsidized public compute service is part of the design. A richer custom studio interface is a later option if native controls prove limiting. See [delivery and costs](docs/DELIVERY-AND-COSTS.md).
+The desktop workspace fits the window: library, central stage, full-height inspector and sound deck. Smaller screens switch between those panels. Prompt fields have fixed heights and scroll internally.
 
-## Planned experience
+Cloud execution needs both execution access and credits in the workspace selected at sign-in. A connected badge confirms sign-in; it does not verify a plan or credit balance. New music, frames and scenes use that workspace's credits. The included demo plays locally without a generation charge.
 
-1. Import music and select an 8–16 second passage.
-2. Add an image and choose or describe a world.
-3. Inspect the proposed musical timing and adjust its energy or beat markers.
-4. Run the selected Comfy workflow and review the result.
-5. Finish a short clip or evaluate a loop, then export video and a portable recipe.
+## Your compute and your files
 
-Native audio-conditioned generation is the preferred research path. Exact beat alignment, identity retention and seamless looping still need proof. An ordinary video with background music will never be described as proven audio-conditioned generation.
+Run one local server per person. This is a single-user local app, not a hosted multi-user service. OAuth credentials remain in server memory and are never sent to the page. Restarting the server requires reconnecting. Only the selected audio passage and frame are uploaded after scene approval; the original full track stays local.
 
-## Start here
+Browser drafts, frame images and names use local browser storage. Run recovery records and downloaded results use the ignored `local/` directory. Browser site-data removal clears its library; local file deletion does not delete media already uploaded to Comfy. Download important media as backups.
 
-| Document | Purpose |
-|---|---|
-| [Specification](SPEC.md) | Audience, proposed experience, scope and acceptance criteria |
-| [Build plan](PLAN.md) | Ordered proof gates and implementation milestones |
-| [Delivery and costs](docs/DELIVERY-AND-COSTS.md) | App Mode, optional MCP companion and user-owned compute |
-| [Architecture](docs/ARCHITECTURE.md) | Comfy boundary, components, job lifecycle and data |
-| [Research](docs/RESEARCH.md) | Primary sources, technical options and remaining uncertainty |
-| [Competition](docs/COMPETITION.md) | Dated contest brief and submission readiness |
-| [Open source and commercial options](docs/OPEN-SOURCE.md) | MIT licensing and possible future paid offerings |
-| [Development](docs/DEVELOPMENT.md) | What exists, checks and future setup decisions |
+All generated images, music, video and creative finishing run through inspectable Comfy workflows. The current path uses Z-Image-Turbo, MiniMax Music 3 and native LTX-2.3 audio-conditioned generation with Comfy finishing. Other Comfy installations and independent recipient billing have not yet been validated. See [delivery and costs](docs/DELIVERY-AND-COSTS.md).
 
-The [GitHub issue tracker](https://github.com/Zuberverse/soundscape-studio/issues) owns tasks, defects and unresolved technical investigations. [ROADMAP.md](ROADMAP.md) describes the larger sequence; [WORKSTREAM.md](WORKSTREAM.md) holds current execution context.
+## Use an agent, or use Comfy directly
+
+**Use an agent** copies a brief for Codex or Claude with the current frame, scene name, direction and timing. Copying it grants no spending permission. There is no required Soundscape plugin.
+
+Experimental WebMCP exposes 14 browser tools to inspect and prepare the studio, including frame selection and scene naming. Tools can open reviews; they cannot submit paid generation or start the microphone. The clipboard handoff works when the browser has no WebMCP support. See [agent interface](docs/WEBMCP.md).
+
+**Other ways to create** exports a prepared native Comfy workflow or portable scene recipe. Import the workflow into your own Comfy workspace and supply the matching source files there. Native microphone variants and the MiniMax song workflow are included.
+
+## Proof and limits
+
+First Light is an original Comfy-generated image, song and eight-second scene: 1280 × 704 at 24 fps, with the original musical passage preserved through Comfy finishing. The actual integrated native app and the local studio's sign-in → submit → result path were exercised. No seamless-loop or exact generative beat-sync claim is made.
+
+See [implementation evidence](docs/IMPLEMENTATION.md), [demo provenance](demo/README.md), [development](docs/DEVELOPMENT.md), [design](DESIGN.md), [specification](SPEC.md) and [release plan](PLAN.md). The [issue tracker](https://github.com/Zuberverse/soundscape-studio/issues) owns unresolved release work. No hosted service or competition submission is live.
 
 ## Open source
 
-Original repository code and documentation are offered under the [MIT License](LICENSE). Commercial use is allowed. A future paid hosted service or edition is possible; none is currently available or promised. Models, runtime dependencies, contributed media and user uploads retain their own licenses and rights.
+Original code and documentation use [MIT](LICENSE), including commercial use. A future paid edition, support offering or hosted service is possible; none is currently offered. External models, dependencies and media retain their terms; see [notices](THIRD_PARTY_NOTICES.md) and [commercial policy](docs/OPEN-SOURCE.md).
 
-Soundscape Studio is an independent project by Zuberant. It is not an official Comfy, LTX or Higgsfield product and is unrelated to the OpenSoundscape bioacoustics library.
+Soundscape Studio is an independent project by Zuberant, separate from the OpenSoundscape bioacoustics library. It is not an official Comfy, LTX or Higgsfield product.

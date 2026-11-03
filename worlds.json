@@ -1,0 +1,58 @@
+[
+  {
+    "id": "slow-drift",
+    "name": "Slow drift",
+    "description": "One gentle forward camera movement.",
+    "color": "#F5C97B",
+    "kind": "motion",
+    "prompt": "Use the selected frame as the setting. Make one gentle continuous camera drift forward. Let light and small environmental details respond naturally to the music. Keep the geometry coherent, with no cuts or flashes."
+  },
+  {
+    "id": "wide-orbit",
+    "name": "Wide orbit",
+    "description": "A patient movement around the scene.",
+    "color": "#85EBFF",
+    "kind": "motion",
+    "prompt": "Use the selected frame as the setting. Make one patient, shallow camera orbit around the main subject. Preserve the character of the frame while revealing depth and parallax. Let the movement follow the musical phrasing, without cuts or flashes."
+  },
+  {
+    "id": "steady-view",
+    "name": "Steady view",
+    "description": "A stable camera with subtle living detail.",
+    "color": "#B794FF",
+    "kind": "motion",
+    "prompt": "Use the selected frame as the setting. Keep the camera steady. Bring the scene to life with subtle light, atmosphere and material movement shaped by the music. Preserve its composition and avoid cuts, flashes or abrupt transformations."
+  },
+  {
+    "id": "custom",
+    "name": "Custom direction",
+    "description": "Describe the movement and light.",
+    "color": "#B9C9FF",
+    "kind": "motion",
+    "prompt": ""
+  },
+  {
+    "id": "celestial-cathedral",
+    "name": "Open Vault",
+    "color": "#F5C97B",
+    "description": "Monumental arches. A patient forward drift.",
+    "prompt": "A vaulted hall above slow-moving clouds. Ivory arches and a narrow gold ribbon of light lead toward an open doorway. Drift gently forward in one continuous shot. Let the light rise and fall with the musical phrases. Keep the architecture stable and the movement restrained, without cuts or flashes.",
+    "kind": "legacy"
+  },
+  {
+    "id": "aurora-portal",
+    "name": "Tidal Glass",
+    "color": "#85EBFF",
+    "description": "Mirrored water. Light moving across the horizon.",
+    "prompt": "A still ocean acts like dark glass beneath low ribbons of green and violet light. Move the camera slowly toward an illuminated opening on the horizon. Let reflections and light breathe with the music. Keep the motion continuous and gentle, without cuts or flashes.",
+    "kind": "legacy"
+  },
+  {
+    "id": "luminous-abstraction",
+    "name": "Ribbon Study",
+    "color": "#B794FF",
+    "description": "Sculptural ribbons. A restrained camera orbit.",
+    "prompt": "Pearl fabric and amber glass float in a deep midnight space. Move in one slow orbit around the sculptural forms. Let the folds open through musical phrases and the highlights respond to selected accents. Keep the materials tangible and the motion gentle, without cuts or flashes.",
+    "kind": "legacy"
+  }
+]
