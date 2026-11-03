@@ -1,6 +1,6 @@
 # Competition brief
 
-**As of:** November 2, 2026
+**As of:** November 2, 2026; official page rechecked for source publication
 
 **Purpose:** planning reference for Comfy's Open Source Higgsfield challenge
 
@@ -14,16 +14,16 @@ Relevant targets are Best Overall ($10,000), Most Innovative (RTX 5090), and the
 
 ## Fit
 
-Proposed demonstration: one cleared music passage, one starting image, three world interpretations. Show one real import-to-export journey and the executed Comfy graph. Explain the editable world score, distinguish raw generation from finishing, and state what remains unsupported.
+The implemented demonstration is First Light: one original song passage, a starting frame and an eight-second LTX scene. The studio adds reusable frames, movement direction, optional names and a visible review-to-result journey. Show one real import-to-export journey and the executed Comfy graph. Explain the editable world score, distinguish raw generation from finishing, and state what remains unsupported.
 
 Do not claim the first music-to-video system, guaranteed beat sync, seamless looping or an all-open-weights stack without supporting evidence.
 
 ## Before any entry
 
 - Verify the live rules, exact form fields, demo/link requirements, social-post requirements and any terms. The collapsed page sections and interactive submission form were not fully inspected during this research; those details remain open.
-- Complete and test an actual runnable Comfy App Mode app with setup instructions, model/node inventory and required notices. An optional plugin or prompt-only package is not a substitute for that working app. Verify that recipients execute using their own workspace.
+- Verify the published local studio and native Comfy workflows from a fresh recipient setup, with the model/node inventory and required notices. An optional plugin or prompt-only package is not a substitute for that working app. Verify that recipients execute using their own workspace.
 - Confirm input/demo publication rights and avoid secrets or private data in graphs and manifests.
 - Check the eligible category against the exact executed workflow, including every partner/API dependency.
 - Record the demo, tag/release and reproducible example actually submitted.
 
-The documentation foundation is not a working competition entry. The deadline does not authorize starting implementation, spending, posting or submitting as part of this task.
+Publishing source does not register or submit a competition entry. A contest submission, social post or further generation requires its own authorization. The current repo contains a working experimental app; recipient billing and real-device acceptance remain open.

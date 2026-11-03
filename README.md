@@ -1,16 +1,24 @@
+<img src="studio/assets/icon-192.png" alt="" width="52" height="52">
+
 # Soundscape Studio
 
 **Give your music a world.**
 
 An open-source local studio for making short music-driven scenes with Comfy. Create or choose a reusable **frame**, add **sound**, direct the movement, and review the resulting **scene**. Download it as a video.
 
-**Status: experimental local v0.1, with a real Comfy-generated demo.** The studio signs in to the user's Comfy account, submits approved runs, shows progress and retrieves results. It is a standalone mini app; an agent is optional. There is no bundled paid key or creator-funded public generation service.
+**Status: experimental v0.1 source release, with a real Comfy-generated demo.** The studio signs in to the user's Comfy account, submits approved runs, shows progress and retrieves results. It is a standalone mini app; an agent is optional. There is no bundled paid key or creator-funded public generation service.
+
+![Soundscape Studio with its frame library, central preview, scene controls and audio passage editor](docs/images/studio.png)
+
+[Watch First Light, the included eight-second demo](demo/world.mp4) · [Setup help](docs/TROUBLESHOOTING.md) · [Contributing](CONTRIBUTING.md)
 
 ## Run the studio
 
-Requires Node.js 22 or newer and npm.
+Requires Node.js 22 or newer (tested with Node 24), npm, and a modern browser with Web Audio and IndexedDB. You can explore the included demo without a Comfy account. Creating new media requires your own Comfy Cloud account with workflow execution access and credits.
 
 ```sh
+git clone https://github.com/Zuberverse/soundscape-studio.git
+cd soundscape-studio
 npm ci
 npm start
 ```
@@ -28,11 +36,11 @@ Cloud execution needs both execution access and credits in the workspace selecte
 
 ## Your compute and your files
 
-Run one local server per person. This is a single-user local app, not a hosted multi-user service. OAuth credentials remain in server memory and are never sent to the page. Restarting the server requires reconnecting. Only the selected audio passage and frame are uploaded after scene approval; the original full track stays local.
+Run one local server per person. This is a single-user local app, not a hosted multi-user service. OAuth credentials remain in server memory and are never sent to the page. Restarting the server requires reconnecting. Only the selected audio passage and frame are uploaded after scene approval; the original full track stays local. Descriptions and optional lyrics are sent to Comfy when you approve creating a frame or song.
 
 Browser drafts, frame images and names use local browser storage. Run recovery records and downloaded results use the ignored `local/` directory. Browser site-data removal clears its library; local file deletion does not delete media already uploaded to Comfy. Download important media as backups.
 
-All generated images, music, video and creative finishing run through inspectable Comfy workflows. The current path uses Z-Image-Turbo, MiniMax Music 3 and native LTX-2.3 audio-conditioned generation with Comfy finishing. Other Comfy installations and independent recipient billing have not yet been validated. See [delivery and costs](docs/DELIVERY-AND-COSTS.md).
+All generated images, music, video and creative finishing run through inspectable Comfy workflows. The current path uses Z-Image-Turbo, MiniMax Music 3 and native LTX-2.3 audio-conditioned generation with Comfy finishing. Local self-hosted Comfy is not integrated. Execution has been verified with one development account; independent recipient billing remains an open acceptance check. Publishing this experimental source does not certify a hosted or multi-user service. See [delivery and costs](docs/DELIVERY-AND-COSTS.md).
 
 ## Use an agent, or use Comfy directly
 
@@ -47,6 +55,17 @@ Experimental WebMCP exposes 14 browser tools to inspect and prepare the studio, 
 First Light is an original Comfy-generated image, song and eight-second scene: 1280 × 704 at 24 fps, with the original musical passage preserved through Comfy finishing. The actual integrated native app and the local studio's sign-in → submit → result path were exercised. No seamless-loop or exact generative beat-sync claim is made.
 
 See [implementation evidence](docs/IMPLEMENTATION.md), [demo provenance](demo/README.md), [development](docs/DEVELOPMENT.md), [design](DESIGN.md), [specification](SPEC.md) and [release plan](PLAN.md). The [issue tracker](https://github.com/Zuberverse/soundscape-studio/issues) owns unresolved release work. No hosted service or competition submission is live.
+
+## Development
+
+```sh
+npm test
+npx playwright install chromium
+# Keep npm start running in another terminal:
+npm run test:e2e
+```
+
+Browser tests mock generation and use a synthetic microphone; they spend no Comfy credits. See [development](docs/DEVELOPMENT.md) for workflow regeneration and the tested environment.
 
 ## Open source
 

@@ -16,7 +16,7 @@ The defining behavior is a visible connection between musical timing, visual int
 
 The current interface is a standalone local mini app, backed by a single-user loopback server. Users connect their own Comfy account through OAuth; generation and finishing run in the selected workspace. Native Comfy workflow/App Mode export is an alternate route. An agent is optional: clipboard handoff works independently, and experimental WebMCP tools can prepare the browser.
 
-There is no project-funded public inference endpoint, bundled credential, shared creator workspace or automatic subsidy. Separate-user billing isolation is an explicit release gate and has not been tested. [Delivery and costs](docs/DELIVERY-AND-COSTS.md) owns that contract. Hosted multi-user service and local self-hosted Comfy support are not implemented.
+There is no project-funded public inference endpoint, bundled credential, shared creator workspace or automatic subsidy. Separate-user billing isolation has not been tested and remains required before claiming independently verified recipient execution. [Delivery and costs](docs/DELIVERY-AND-COSTS.md) owns that contract. Hosted multi-user service and local self-hosted Comfy support are not implemented.
 
 ## Current complete journey
 
@@ -54,11 +54,11 @@ Import one PNG or JPEG, proposed maximum 20 MB and 25 megapixels. Choose a start
 
 Initial directions:
 
-| World | Visual intention | Musical interpretation |
+| Frame preset | Visual intention | Musical interpretation |
 |---|---|---|
-| Celestial Cathedral | Monumental arches, luminous depth, patient forward movement | Sustained passages open space; selected accents reveal light |
-| Aurora Portal | A traversable-looking field of ribbons, color and distant thresholds | Phrases guide changes in movement and atmosphere |
-| Luminous Abstraction | Sculptural forms and flowing material in a coherent space | Energy shapes intensity; transients punctuate restrained changes |
+| Open Vault | Monumental arches, luminous depth, patient forward movement | Sustained passages open space; selected accents reveal light |
+| Tidal Glass | A traversable-looking field of ribbons, color and distant thresholds | Phrases guide changes in movement and atmosphere |
+| Ribbon Study | Sculptural forms and flowing material in a coherent space | Energy shapes intensity; transients punctuate restrained changes |
 
 These are editable prompt recipes and motion intentions. No preset should require a private asset, personal identity, unlicensed font or hidden prompt service.
 

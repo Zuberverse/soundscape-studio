@@ -37,7 +37,7 @@ The MCP documentation supports account-based Cloud connection, OAuth in supporte
 
 Comfy's built-in Agent is another optional control surface and spends credits for its own conversations as well as workflow runs. It is not required by Soundscape Studio. [Comfy Agent cost explanation](https://support.comfy.org/articles/4013072355-comfy-agent)
 
-## Required safeguards before runnable distribution
+## Safeguards for experimental source distribution
 
 - No bundled API key, OAuth token, creator-workspace invitation or creator-funded run endpoint.
 - Users identify their execution target and own it before a job starts. Never use a hidden default maintainer target when sign-in fails.
@@ -48,7 +48,7 @@ Comfy's built-in Agent is another optional control surface and spends credits fo
 
 ## Billing acceptance test
 
-Before advertising “runs on your own account,” test with two separately authorized workspaces/users. Share the actual candidate app/graph without credentials. Have the recipient sign in, import their own copy, run one bounded job and retrieve its output. Record the recipient's job/workspace and usage evidence, and verify no matching job or usage landed in the author's workspace. Use only redacted evidence in public documentation.
+Before claiming independently verified recipient billing isolation, test with two separately authorized workspaces/users. The experimental source uses local operator OAuth by design; one-account live execution is the current evidence. Share the actual candidate app/graph without credentials. Have the recipient sign in, import their own copy, run one bounded job and retrieve its output. Record the recipient's job/workspace and usage evidence, and verify no matching job or usage landed in the author's workspace. Use only redacted evidence in public documentation.
 
 Also test missing sign-in, missing credits and reconnect/retry. The product must fail visibly rather than spend from a hidden fallback. This test needs a separately authorized recipient/workspace and bounded spend; the development operator’s successful run does not satisfy it.
 

@@ -9,14 +9,14 @@
 | Local studio | Frame library, four sound sources, movement, names, OAuth, approval, progress/results, exports | Independent fresh-user execution and billing isolation |
 | Beginner UX | Viewport workspace, visible controls, fixed prompts, result stage, neutral agent handoff | Human feedback across more screen sizes and assistive technologies |
 | Agent compatibility | 14 native experimental WebMCP tools tested; clipboard fallback | Other browser/agent-host discovery, no universal support claim |
-| Public release | Public foundation repo; working implementation and original demo prepared locally | Scoped publication approval, independent recipient test, current contest review |
+| Public release | Working studio, workflows, original demo and public setup instructions | Independent recipient test, broader compatibility and contest review |
 
 ## Required next release proof
 
 1. With a separately authorized recipient/workspace and bounded spend, import/run the candidate and verify their account owns the job and usage, with no matching author-workspace charge. [#2](https://github.com/Zuberverse/soundscape-studio/issues/2) owns this gate.
 2. Have a beginner complete frame → sound → direction/name → review → result/download using public instructions. Check missing execution access, reconnect, errors and existing-job recovery.
 3. Test additional passage lengths against Comfy's frame grid; retain exact duration/audio evidence. [#3](https://github.com/Zuberverse/soundscape-studio/issues/3) owns finishing/loop proof. Do not add a seamless label without repeated-wrap review.
-4. Verify clean install, source/privacy/license review and the selected source revision before publication. Update existing issues with redacted evidence when external publication is authorized. The current local implementation does not close their full release criteria.
+4. Keep clean-install, source/privacy/license and exact-source checks passing. Keep existing issues aligned with published implementation evidence. The current local implementation does not close their full release criteria.
 5. Recheck the live competition deadline, categories and submission form before entering. No contest submission is authorized by completing the app.
 
 ## Deliberate later scope

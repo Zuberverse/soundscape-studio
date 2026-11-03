@@ -1,6 +1,6 @@
 # Implementation and verification
 
-**As of:** November 2, 2026. Experimental local v0.1. Source and media remain local until publication is separately approved.
+**As of:** November 2, 2026. Experimental v0.1 source release. Published source is distinct from a hosted deployment or independently validated recipient release.
 
 ## Current behavior
 
@@ -30,6 +30,6 @@ The isolated Chromium browser suite exercises frame create/select/import/rename/
 
 ## Material limits
 
-Only the development operator's Comfy account has completed live execution. Independent recipient billing isolation remains [#2](https://github.com/Zuberverse/soundscape-studio/issues/2), a public runnable-release gate. The server is local and single-user; do not expose it as multi-tenant infrastructure. Native Comfy microphone variants are packaged but untested with a real device; browser mic QA used synthetic input. One source scene has a creative review; movement presets share its graph and are not a broad aesthetic benchmark.
+Only the development operator's Comfy account has completed live execution. Independent recipient billing isolation remains [#2](https://github.com/Zuberverse/soundscape-studio/issues/2), a gate before claiming independently verified recipient execution. The server is local and single-user; do not expose it as multi-tenant infrastructure. Native Comfy microphone variants are packaged but untested with a real device; browser mic QA used synthetic input. One source scene has a creative review; movement presets share its graph and are not a broad aesthetic benchmark.
 
 Cost varies and is not estimated by the studio. Reconnection confirms sign-in, not execution entitlement. Tokens are memory-only and reconnect is required after restart. Completed files and known jobs survive in local storage, but ambiguous submissions without a Cloud ID require checking the Comfy queue; the app does not automatically retry them. Scene metadata is local, not a synchronized Cloud project system. Recipe import, long arrangements, portrait output, beat editing, seamless loops and live diffusion are future work.

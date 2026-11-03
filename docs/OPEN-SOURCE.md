@@ -1,6 +1,6 @@
 # Open source and possible commercial offerings
 
-**State:** initial policy, November 2, 2026. No paid product is available.
+**State:** current policy, November 2, 2026. No paid product is available.
 
 ## Repository license
 
@@ -10,7 +10,7 @@ The project can therefore remain an open-source tool while exploring a paid serv
 
 ## Possible future offerings
 
-Unselected options include a paid interface or workflow-management layer, team collaboration, support, separately licensed additions, or an explicitly designed managed-compute service. The initial distribution uses the user's own Comfy account/hardware, without subsidized compute. Each would need a concrete offer, operating costs and a clear boundary before launch. No account system, pricing, billing integration or commercial commitment is authorized by this foundation.
+Unselected options include a paid interface or workflow-management layer, team collaboration, support, separately licensed additions, or an explicitly designed managed-compute service. The initial distribution uses the user's own Comfy account/hardware, without subsidized compute. Each would need a concrete offer, operating costs and a clear boundary before launch. No paid account system, pricing, billing integration or commercial offer is implemented. Comfy OAuth connects the local operator to their existing workspace.
 
 If an open-core approach is later selected, document exactly what remains in the open tool, what a paid addition supplies, and how each is licensed. Do not advertise a self-hostable tool whose central documented workflow secretly depends on an unavailable private service. No exclusive relicensing rights are implied over outside contributors' work.
 
@@ -31,4 +31,4 @@ The current challenge requires an open-source app, license and setup instruction
 | Music, images and demonstration media | Rights must be recorded separately; uploads are not automatically licensed under the repository's MIT grant |
 | Brand marks and names | No claim of exclusive ownership or third-party trademark rights from the software license |
 
-This foundation vendors no external code, model, binary or media. The first implementation records exact dependency licenses; a later distribution review must inspect what is actually shipped, not only this plan.
+The repository includes attributed Comfy workflow adaptations, OFL fonts, a project icon and original AI-generated demo media. Runtime packages are installed through the lockfile; model weights and runtime binaries are not bundled. [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md), the font notices and [demo provenance](../demo/README.md) describe the shipped material. User uploads are never covered by the repository license automatically.
