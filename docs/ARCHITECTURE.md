@@ -24,7 +24,7 @@ flowchart LR
 | `studio/webmcp.mjs` | Feature-detected experimental browser agent tools; preparation only |
 | `server.mjs` | Loopback HTTP, session/Host/Origin checks, safe static files and action endpoints |
 | `backend/bridge.mjs` | Official MCP client, supported OAuth flow, fixed Comfy service and response decoding |
-| `backend/jobs.mjs` | One active run, source upload, saved workflow submission, recovery, cancellation and result collection |
+| `backend/jobs.mjs` | Up to four overlapping runs keyed by approval identity, source upload, saved workflow submission, recovery, cancellation and result collection |
 | `workflows/`, `vendor/comfy/` | Inspectable native Comfy graphs and upstream attribution |
 
 The runtime uses Node 22+ and `@modelcontextprotocol/client` 2.4.0. Plain browser modules need no bundler. Playwright 1.63.0 is test-only. Python 3 rebuilds movement and native microphone variants. No database service, text model or separate agent is required.
@@ -41,7 +41,7 @@ This process serves one local operator. Multiple tabs share its connection and b
 
 The browser validates media before generation: audio ≤50 MB and 2–300 seconds; image ≤20 MB and 25 megapixels. It decodes audio locally and creates a WAV containing only the chosen 2–16 second passage. After review and explicit credit consent, the backend creates a durable local job identity before uploading or submitting.
 
-The backend prepares a native graph, uploads the scene's excerpt/image through the Comfy-provided fixed upload service, saves a new workflow in the user's workspace and submits once. It records the returned Cloud job ID immediately. Jobs progress through preparing, submitting, queued/running, downloading and completed, or retain failed/cancelled/review-required states. Refresh follows the known job. Concurrent starts share the owned active submission. A missing/ambiguous Cloud identity blocks blind paid resubmission. Cancellation is requested from Comfy and terminal state is checked afterward.
+The backend prepares a native graph, uploads the scene's excerpt/image through the Comfy-provided fixed upload service, saves a new workflow in the user's workspace and submits once. It records the returned Cloud job ID immediately. Jobs progress through preparing, submitting, queued/running, downloading and completed, or retain failed/cancelled/review-required states. Refresh follows the known job. Up to four runs may be in flight; submissions are serialized, and a repeated approval identity returns its existing run rather than submitting again. A missing/ambiguous Cloud identity blocks blind paid resubmission. Cancellation is requested from Comfy and terminal state is checked afterward.
 
 The native frame grid can exceed the requested musical duration. Finishing trims in Comfy to the intended output frame count without stretching the soundtrack. The verified eight-second result has matching audio/video duration. Model response to phrasing does not imply exact beat placement.
 

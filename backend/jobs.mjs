@@ -5,10 +5,13 @@ import {prepareWorkflow,prepareSongWorkflow,prepareSceneImageWorkflow,validateSc
 import {resultField,uploadUrl} from './bridge.mjs';
 
 export const finished=['completed','failed','cancelled','released'];
+// Several approved runs may be in flight at once; each approval carries one request identity so a retry never pays twice.
+export const maxActive=4;
+const requestPattern=/^[a-f0-9-]{36}$/;
 
 export class StudioJobs {
-  constructor(root,bridge,storageRoot=root){this.root=root;this.storageRoot=storageRoot;this.bridge=bridge;this.jobs=new Map();this.active=null;this.collecting=new Set()}
-  async init(){await mkdir(resolve(this.storageRoot,'local/results'),{recursive:true,mode:0o700});try{const saved=JSON.parse(await readFile(resolve(this.storageRoot,'local/jobs.json'),'utf8'));let changed=false;for(const job of saved){if(job.state==='preparing'){Object.assign(job,{state:'failed',message:'The studio closed before this run was submitted. Nothing ran in Comfy.'});changed=true}else if(job.state==='submitting'&&!job.promptId){Object.assign(job,{state:'needs_review',message:'The studio closed while submitting. Check your Comfy queue before releasing this run.'});changed=true}this.jobs.set(job.id,job)}this.active=saved.filter(j=>!finished.includes(j.state)).at(-1)?.id||null;if(changed)await this.persist()}catch(e){if(e.code!=='ENOENT')this.storeError='Saved run history could not be read. Restore it before starting another paid run.'}}
+  constructor(root,bridge,storageRoot=root){this.root=root;this.storageRoot=storageRoot;this.bridge=bridge;this.jobs=new Map();this.collecting=new Set()}
+  async init(){await mkdir(resolve(this.storageRoot,'local/results'),{recursive:true,mode:0o700});try{const saved=JSON.parse(await readFile(resolve(this.storageRoot,'local/jobs.json'),'utf8'));let changed=false;for(const job of saved){if(job.state==='preparing'){Object.assign(job,{state:'failed',message:'The studio closed before this run was submitted. Nothing ran in Comfy.'});changed=true}else if(job.state==='submitting'&&!job.promptId){Object.assign(job,{state:'needs_review',message:'The studio closed while submitting. Check your Comfy queue before releasing this run.'});changed=true}this.jobs.set(job.id,job)}if(changed)await this.persist()}catch(e){if(e.code!=='ENOENT')this.storeError='Saved run history could not be read. Restore it before starting another paid run.'}}
   async persist(){const file=resolve(this.storageRoot,'local/jobs.json'),snapshot=JSON.stringify([...this.jobs.values()]);this.writeChain=(this.writeChain||Promise.resolve()).catch(()=>{}).then(async()=>{await writeFile(file+'.tmp',snapshot,{mode:0o600});await rename(file+'.tmp',file)});return this.writeChain}
   public(job){const {id,kind,state,message,output,error,created}=job;return {id,kind,state,message,output,error,created}}
   async upload(file,kind){
@@ -28,15 +31,18 @@ export class StudioJobs {
   async submit(kind,input){
     if(!this.bridge.connected)throw Error('Connect your Comfy account first.');
     if(input.confirm!==true)throw Error('Review and approve credit use before generating.');
-    if(this.submissionPromise)return this.submissionPromise;
-    const task=this.startSubmission(kind,input);this.submissionPromise=task;
-    try{return await task}finally{if(this.submissionPromise===task)this.submissionPromise=null}
+    if(typeof input.requestId!=='string'||!requestPattern.test(input.requestId))throw Error('Reload the studio, then approve this run again.');
+    // Submissions are serialized so duplicate approvals and the active-run limit are checked against settled state.
+    const task=(this.submissionChain||Promise.resolve()).catch(()=>{}).then(()=>this.startSubmission(kind,input));this.submissionChain=task;return task;
   }
+  activeJobs(){return [...this.jobs.values()].filter(j=>!finished.includes(j.state)&&j.state!=='needs_review')}
   async startSubmission(kind,input){
     if(this.storeError)throw Error(this.storeError);
     if(!this.bridge.connected)throw Error('Connect Comfy before creating new media.');
     if(input.confirm!==true)throw Error('Review and approve credit use before generating.');
-    if(this.active){const prior=this.jobs.get(this.active);if(prior&&!finished.includes(prior.state))return this.public(prior)}
+    const prior=[...this.jobs.values()].find(j=>j.requestId===input.requestId);if(prior){if(prior.kind!==kind)throw Error('This approval was already used for another run.');return this.public(prior)}
+    if([...this.jobs.values()].some(j=>j.state==='needs_review'))throw Error('A run needs review first. Check your Comfy queue, then release it from Runs.');
+    if(this.activeJobs().length>=maxActive)throw Error(`${maxActive} runs are already in progress. Start another when one finishes.`);
     let graph;
     if(kind==='world'){
       validateScore(input.score,input.audioDuration);
@@ -45,7 +51,7 @@ export class StudioJobs {
       graph=prepareWorkflow(JSON.parse(await readFile(resolve(this.root,'workflows',input.score.world+'.json'),'utf8')),input.score);
     }else if(kind==='image')graph=prepareSceneImageWorkflow(JSON.parse(await readFile(resolve(this.root,'workflows/scene-image.json'),'utf8')),input.imageDirection);
     else graph=prepareSongWorkflow(JSON.parse(await readFile(resolve(this.root,'workflows/minimax-song.json'),'utf8')),input.song);
-    const job={id:randomUUID(),kind,state:'preparing',message:'Preparing your Comfy workflow…',created:new Date().toISOString()};this.jobs.set(job.id,job);this.active=job.id;await this.persist();
+    const job={id:randomUUID(),requestId:input.requestId,kind,state:'preparing',message:'Preparing your Comfy workflow…',created:new Date().toISOString()};this.jobs.set(job.id,job);await this.persist();
     // Return an owned local identity before any upload or submission begins.
     this.execute(job,graph,input).catch(async e=>{job.state=job.promptId?'failed':job.state==='submitting'?'needs_review':'failed';job.error=e.message;job.message='The run needs attention. No automatic resubmission.';await this.persist()});
     return this.public(job);
@@ -96,5 +102,5 @@ export class StudioJobs {
   }
   async cancel(id){const job=this.jobs.get(id);if(!job?.promptId)throw Error('No submitted Comfy job is available to cancel.');if(!['queued','running'].includes(job.state))return this.public(job);await this.bridge.call('cancel_job',{prompt_id:job.promptId});job.state='cancel_requested';job.message='Cancellation requested; confirming the final Comfy state…';await this.persist();return this.public(job)}
   // An uncertain submission blocks new spending until the person confirms they checked their Comfy queue.
-  async release(id){const job=this.jobs.get(id);if(!job)throw Error('That run was not found in this local studio.');if(job.state!=='needs_review')throw Error('Only a run marked for review can be released.');Object.assign(job,{state:'released',message:'Released after you checked the Comfy queue. The studio will not resubmit it.',error:null});if(this.active===id)this.active=null;await this.persist();return this.public(job)}
+  async release(id){const job=this.jobs.get(id);if(!job)throw Error('That run was not found in this local studio.');if(job.state!=='needs_review')throw Error('Only a run marked for review can be released.');Object.assign(job,{state:'released',message:'Released after you checked the Comfy queue. The studio will not resubmit it.',error:null});await this.persist();return this.public(job)}
 }

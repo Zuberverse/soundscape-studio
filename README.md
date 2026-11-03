@@ -28,7 +28,7 @@ Open **http://127.0.0.1:4317**. Choose **Example** to watch First Light without 
 1. **Frame:** create one through Comfy, upload an image, or choose a saved frame in the library.
 2. **Sound:** use the demo, upload music, record up to 30 seconds, or describe a song for MiniMax Music 3. Select a 2–16 second passage.
 3. **Scene:** choose a movement preset or write a direction. Optionally name the scene; a default is supplied when blank.
-4. **Create:** connect Comfy, review the sources, approve credit use and start one run. Watch and download the result on the stage. Rename it later without generating again.
+4. **Create:** connect Comfy, review the sources, approve credit use and start a run. Start more while it works (up to four at once) and follow them under **Runs**. Watch and download each result on the stage. Rename it later without generating again.
 
 The desktop workspace fits the window: library, central stage, full-height inspector and sound deck. Smaller screens switch between those panels. Prompt fields have fixed heights and scroll internally.
 

@@ -9,7 +9,9 @@ A small creative studio built around the scene being made. The image is the visu
 
 ## Layout and hierarchy
 
-Desktop uses one window: a 250–280px asset library, flexible central stage, a 300–360px full-height inspector and a compact sound deck under the stage. Independent panel scrolling replaces document scrolling. The inspector's review/create action stays visible. At widths below 901px, Library / Stage / Sound / Controls tabs show one panel at a time.
+Desktop uses one window: a 250–280px asset library, flexible central stage, a 300–360px full-height inspector and a compact sound deck under the stage. Independent panel scrolling replaces document scrolling. The inspector's review/create action stays visible. One 56px header row holds the brand, connection, Runs and agent actions at every width; status text compacts to a mark below 1191px. From 761px to 960px all four panels stay visible with a narrower library and inspector. At 760px and below, a 52px header and Library / Stage / Sound / Controls tabs show one panel at a time.
+
+Runs is a header chip with a pulsing mark while any run works. Its tray lists recent frame, song and scene runs with state, Open and Cancel; a background run that finishes announces itself in the status bar without taking over the stage.
 
 Frames and Scenes are library tabs. Create frame and Upload image sit above frame assets; Import video sits above scene assets. Asset rows use images, type and separators rather than nested rounded cards. The selected frame has a quiet gold outline and label. Scenes open on the stage. The Frame/Result switch retains the reference while viewing progress or output. Example playback is a clear separate action. New scene clears the optional scene name while retaining selected media and direction.
 
