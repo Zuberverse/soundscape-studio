@@ -1,6 +1,8 @@
 # Concept walkthrough
 
-A roughly 65-second walkthrough has been produced for this early concept, currently called **Soundscape Studio**. It shows the real studio controls and previously completed Comfy outputs. It does not depict a new generation completing during the recording.
+[Watch the roughly 65-second concept walkthrough on YouTube](https://youtu.be/aF5L9YLIfCY).
+
+This early concept currently has the working title **Soundscape Studio**. It shows the real studio controls and previously completed Comfy outputs. It does not depict a new generation completing during the recording.
 
 The included [First Light MP4 download](https://github.com/Zuberverse/soundscape-studio/raw/refs/heads/main/demo/world.mp4) is a separate eight-second Comfy-generated output. Download it or choose **Example** inside the running studio to watch it.
 

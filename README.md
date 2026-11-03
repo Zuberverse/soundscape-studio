@@ -10,7 +10,7 @@ An early concept I’m calling **Soundscape Studio**: an open-source local studi
 
 ![Soundscape Studio with its frame library, central preview, scene controls and audio passage editor](docs/images/studio.png)
 
-[Download First Light, the eight-second demo (MP4)](https://github.com/Zuberverse/soundscape-studio/raw/refs/heads/main/demo/world.mp4) · [Setup help](docs/TROUBLESHOOTING.md) · [Contributing](CONTRIBUTING.md) · [Demo walkthrough guide](docs/DEMO.md)
+[Watch the 65-second concept walkthrough](https://youtu.be/aF5L9YLIfCY) · [Download First Light, the eight-second demo (MP4)](https://github.com/Zuberverse/soundscape-studio/raw/refs/heads/main/demo/world.mp4) · [Setup help](docs/TROUBLESHOOTING.md) · [Contributing](CONTRIBUTING.md) · [About the walkthrough](docs/DEMO.md)
 
 ## Run the studio
 
