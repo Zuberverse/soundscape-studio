@@ -108,6 +108,6 @@ Export the final video, a portable recipe manifest and the exact executed Comfy 
 
 Add three polished worlds, portrait export, saved projects, comparative takes and workflow portability after the single-world path works. Explore music-conditioned scene planning, multi-shot arrangements, generated music and visual stem controls later. Live streaming, full-song music videos, collaboration, subscriptions and hosted accounts are outside the first build.
 
-## Commercial posture
+## License
 
-This is an open-source tool with possible future monetization. A paid managed service, collaboration features, support or separately licensed additions may be considered. The initial MIT grant remains valid for recipients, including commercial users. No paid feature, price, account system or purchase flow is part of this specification milestone.
+Original code and documentation use MIT, including commercial use. External models, dependencies and media retain their own terms; see [license and third-party boundaries](docs/OPEN-SOURCE.md).

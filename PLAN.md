@@ -21,6 +21,6 @@
 
 ## Deliberate later scope
 
-Portrait output, longer musical arrangements, visual loop finishing, editable beat markers, recipe re-import, comparative scene takes and local Comfy targets need their own proof. A paid hosted edition needs a tenancy, cost and operations design; no pricing or billing feature is active. Native App Mode and an optional agent remain useful alternate front doors to the same inspectable Comfy graphs.
+Portrait output, longer musical arrangements, visual loop finishing, editable beat markers, recipe re-import, comparative scene takes and local Comfy targets need their own proof. Native App Mode and an optional agent remain useful alternate front doors to the same inspectable Comfy graphs.
 
 The [issue tracker](https://github.com/Zuberverse/soundscape-studio/issues) is the task/defect owner. This plan names proof gates, not a duplicate backlog. [SPEC.md](SPEC.md) owns the current product contract and separates implemented behavior from future direction.

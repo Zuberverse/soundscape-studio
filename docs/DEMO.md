@@ -1,23 +1,21 @@
-# Demo walkthrough guide
+# Concept walkthrough
 
-The included [First Light MP4 download](https://github.com/Zuberverse/soundscape-studio/raw/refs/heads/main/demo/world.mp4) is a real Comfy-generated output. GitHub’s file view does not play this binary; download it or use **Example** inside the running studio. It is eight seconds long; it does not by itself show how the app works. For an entry, record a concise studio walkthrough within the organizer's two-minute limit. This guide is a proposed sequence, not a claim that a walkthrough has been recorded.
+A roughly 65-second walkthrough has been produced for this early concept, currently called **Soundscape Studio**. It shows the real studio controls and previously completed Comfy outputs. It does not depict a new generation completing during the recording.
 
-## Suggested 75–100 second sequence
+The included [First Light MP4 download](https://github.com/Zuberverse/soundscape-studio/raw/refs/heads/main/demo/world.mp4) is a separate eight-second Comfy-generated output. Download it or choose **Example** inside the running studio to watch it.
 
-| Time | Show | Explain |
-|---|---|---|
-| 0–10s | Studio with the included frame | Soundscape Studio is a local mini app. A reusable frame, sound and movement become a named scene. |
-| 10–25s | Try the demo song, waveform and passage controls | Upload, record, describe a song with MiniMax Music 3, or use the original example. Preview only the passage needed for the scene. |
-| 25–40s | Frame library and frame creation form | Frames set the visual starting point and can be reused. Descriptions create still images through Comfy. Close the form if not running it. |
-| 40–55s | Movement direction and optional scene name | Camera, atmosphere and light are directed around the chosen frame. Names can change later without another generation. |
-| 55–70s | Review dialog with approval unchecked | Connect a personal Comfy workspace. New creation uses its access and credits; the app supplies no shared paid key. |
-| 70–85s | Example playback or a clearly identified completed scene | Show a real result. Label the bundled example as previously generated; do not present it as a new run. |
-| 85–100s | Native workflow export, public repo and diagram | Z-Image-Turbo creates frames, MiniMax Music 3 creates songs, and LTX-2.3 conditions scenes on audio/image. Generation and final media composition remain in Comfy. |
+## What the walkthrough shows
 
-If a new run is recorded, obtain a current spend allowance, preserve its identity and disclose any waiting-time edit. Use the actual output, not a mocked QA response. Keep account identifiers, private media and signed URLs out of the recording. Never expose the local server publicly to provide a try-it link.
+- The studio workspace and the idea of giving music a visual world.
+- Reusable frames and the controls for creating or choosing one.
+- Sound sources and the passage controls.
+- Scene direction and creation controls.
+- Previously completed scenes playing in the studio.
 
-## Technical story
+The narration presents a working early concept, with a working title. The recording uses the actual interface and existing outputs; it does not simulate generation or promise that a scene finishes in the length of the walkthrough.
 
-The app is a plain browser studio plus a loopback Node server. The official MCP client connects to Comfy using OAuth. A scene uploads only its chosen audio passage and frame after review, submits one saved workflow and retrieves the known result. The bundled example has matching eight-second audio/video at 1280×704 and 24 fps. It demonstrates native audio-conditioned generation and Comfy finishing; it does not prove exact beat placement or a seamless loop.
+## Try the concept
 
-Experimental WebMCP and a clipboard handoff provide optional agent access. The app also works without an agent. See [setup](../README.md#run-the-studio), [verification](IMPLEMENTATION.md), and the [current submission note](COMPETITION.md).
+Follow the [setup instructions](../README.md#run-the-studio) to run the local studio. The bundled example works without a Comfy account. Creating new media requires your own Comfy workspace with execution access and credits, plus approval in the studio before each run.
+
+See [implementation evidence](IMPLEMENTATION.md) for verified behavior and remaining limits, [demo provenance](../demo/README.md) for the bundled sample, and [competition readiness](COMPETITION.md) for the entry status.

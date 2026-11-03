@@ -14,8 +14,8 @@ Best Overall, Most Innovative and the LTX workflow bonus are relevant candidates
 
 - Public repository, MIT license, complete source, workflow files and clone-to-run instructions: available.
 - Actual Comfy output: First Light, an original eight-second image/music/LTX example, bundled with provenance. It is an output sample, not an app walkthrough.
-- App walkthrough: record the working interface and explain the Comfy pipeline. A proposed sequence is in [DEMO.md](DEMO.md); the recording is not yet included.
-- Public social post: not published by this project task. Prepare it after the walkthrough and owner review.
+- App walkthrough: a roughly 65-second concept walkthrough has been produced, showing the real interface and previously completed Comfy outputs. See [DEMO.md](DEMO.md).
+- Public social post: a link and publication receipt must be verified before treating this requirement as complete.
 - Independent recipient billing and real-device microphone checks: still open, as documented in [implementation evidence](IMPLEMENTATION.md).
 
-The inspected form begins with contact details, then optional social identities, and indicates twelve questions. Later fields were not inspected because the required contact screen was left blank. No personal information, agreement or entry was submitted. A repository alone does not enter the competition.
+**Entry status: NOT SUBMITTED.** This repository records preparation, not a submission receipt. A repository and walkthrough alone do not enter the competition; completion requires the entry form and a verified receipt.

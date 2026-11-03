@@ -4,7 +4,7 @@
 
 **Give your music a world.**
 
-An open-source local studio for making short music-driven scenes with Comfy. Create or choose a reusable **frame**, add **sound**, direct the movement, and review the resulting **scene**. Download it as a video.
+An early concept I’m calling **Soundscape Studio**: an open-source local studio for making short music-driven scenes with Comfy. Create or choose a reusable **frame**, add **sound**, direct the movement, and review the resulting **scene**. Download it as a video.
 
 **Status: experimental v0.1 source release, with a real Comfy-generated demo.** The studio signs in to the user's Comfy account, submits approved runs, shows progress and retrieves results. It is a standalone mini app; an agent is optional. There is no bundled paid key or creator-funded public generation service.
 
@@ -69,6 +69,6 @@ Browser tests mock generation and use a synthetic microphone; they spend no Comf
 
 ## Open source
 
-Original code and documentation use [MIT](LICENSE), including commercial use. A future paid edition, support offering or hosted service is possible; none is currently offered. External models, dependencies and media retain their terms; see [notices](THIRD_PARTY_NOTICES.md) and [commercial policy](docs/OPEN-SOURCE.md).
+Original code and documentation use [MIT](LICENSE), including commercial use. External models, dependencies and media retain their terms; see [notices](THIRD_PARTY_NOTICES.md) and [license and third-party boundaries](docs/OPEN-SOURCE.md).
 
 Soundscape Studio is an independent project by Zuberant, separate from the OpenSoundscape bioacoustics library. It is not an official Comfy, LTX or Higgsfield product.
