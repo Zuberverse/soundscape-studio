@@ -47,3 +47,7 @@ Use semantic buttons, named inputs/dialogs, visible keyboard focus and status an
 Inspect rendered desktop, compact desktop and phone screens, then exercise library selection, sound, fixed prompt, review and results. Acceptance: no document overflow, no overlapping controls, visible create action, clear selected frame, whole source image and no browser errors. The initial review used 1440×1000, 1100×760 and 390×844, with additional small-size checks. The regression suite writes its screenshots to temporary storage.
 
 Source styles are owned by `studio/styles.css`; the implementation pin belongs to the private adopter's design register. Keep public source independent of private systems. Preserve the type/palette hierarchy when adjusting density; compact spacing before shrinking essential text.
+
+## Compact heading typography
+
+Compact inspector/panel labels rendered at 11–13px use the bundled Chakra Petch medium face. Michroma remains the structural display face where its size is at least 16px. This preserves readable small controls and the existing panel geometry; it does not change brand marks, body roles or palette.
